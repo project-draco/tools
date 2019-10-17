@@ -1,0 +1,17 @@
+--- /symbolic.py	2016-09-27 00:41:38.967508486 +0000
++++ /usr/local/lib/python2.7/dist-packages/GitPython-0.3.6-py2.7.egg/git/refs/symbolic.py	2016-09-27 00:59:14.368517008 +0000
+@@ -145,7 +145,13 @@
+             # NOTE: We are not a symbolic ref if we are in a packed file, as these
+             # are excluded explictly
+             for sha, path in cls._iter_packed_refs(repo):
+-                if path != ref_path:
++		p = path
++		rp = ref_path
++		if isinstance(p, str):
++		   p = unicode(path, 'utf-8', 'replace')
++		if isinstance(rp, str):
++		   rp = unicode(ref_path, 'utf-8', 'replace')
++                if p != rp:
+                     continue
+                 # sha will be used
+                 tokens = sha, path

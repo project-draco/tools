@@ -1,0 +1,11 @@
+--- /symbolic.py	2019-08-16 12:51:08.572816241 +0000
++++ /usr/local/lib/python2.7/dist-packages/GitPython-0.3.6-py2.7.egg/git/refs/symbolic.py	2019-08-16 12:51:48.940137012 +0000
+@@ -94,7 +94,7 @@
+                 if not line:
+                     continue
+                 if line.startswith('#'):
+-                    if line.startswith('# pack-refs with:') and not line.endswith('peeled'):
++                    if line.startswith('# pack-refs with:') and 'peeled' not in line:
+                         raise TypeError("PackingType of packed-Refs not understood: %r" % line)
+                     # END abort if we do not understand the packing scheme
+                     continue

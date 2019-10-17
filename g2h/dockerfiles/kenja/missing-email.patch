@@ -1,0 +1,27 @@
+--- /commit.py  2016-10-09 17:00:06.502739406 +0000
++++ /usr/local/lib/python2.7/dist-packages/GitPython-0.3.6-py2.7.egg/git/objects/commit.py      2016-10-09 17:01:46.899413189 +0000
+@@ -387,14 +387,22 @@
+         a = self.author
+         aname = a.name
+         c = self.committer
+-        fmt = "%s %s <%s> %s %s\n"
+-        write((fmt % ("author", aname, a.email,
++        fmt = "%s %s %s %s %s\n"
++        if a.email is None:
++            aemail = ""
++        else:
++            aemail = "<" + a.email + ">"
++        write((fmt % ("author", aname, aemail,
+                       self.authored_date,
+                       altz_to_utctz_str(self.author_tz_offset))).encode(self.encoding))
+
+         # encode committer
+         aname = c.name
+-        write((fmt % ("committer", aname, c.email,
++        if c.email is None:
++            cemail = ""
++        else:
++            cemail = "<" + c.email + ">"
++        write((fmt % ("committer", aname, cemail,
+                       self.committed_date,
+                       altz_to_utctz_str(self.committer_tz_offset))).encode(self.encoding))

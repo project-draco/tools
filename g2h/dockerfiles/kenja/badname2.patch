@@ -1,0 +1,19 @@
+--- /usr/local/lib/python2.7/dist-packages/GitPython-0.3.6-py2.7.egg/git/repo/base.py	2016-09-26 02:06:41.761636241 +0000
++++ /backup/GitPython-0.3.6-py2.7.egg/git/repo/base.py	2016-09-25 23:51:16.651985585 +0000
+@@ -477,14 +477,14 @@ class Commit(base.Object, Iterable, Diffable, Traversable, Serializable):
+
+         try:
+             self.author, self.authored_date, self.author_tz_offset = \
+-                parse_actor_and_date(author_line.decode(self.encoding))
++                parse_actor_and_date(author_line.decode(self.encoding,'replace'))
+         except UnicodeDecodeError:
+             log.error("Failed to decode author line '%s' using encoding %s", author_line, self.encoding,
+                       exc_info=True)
+
+         try:
+             self.committer, self.committed_date, self.committer_tz_offset = \
+-                parse_actor_and_date(committer_line.decode(self.encoding))
++                parse_actor_and_date(committer_line.decode(self.encoding,'replace'))
+         except UnicodeDecodeError:
+             log.error("Failed to decode committer line '%s' using encoding %s", committer_line, self.encoding,
+                       exc_info=True)

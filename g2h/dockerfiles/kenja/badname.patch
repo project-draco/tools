@@ -1,0 +1,25 @@
+--- /usr/local/lib/python2.7/dist-packages/GitPython-0.3.6-py2.7.egg/git/repo/base.py	2016-09-26 02:06:41.761636241 +0000
++++ /backup/GitPython-0.3.6-py2.7.egg/git/repo/base.py	2016-09-25 23:51:16.651985585 +0000
+@@ -57,7 +57,6 @@
+     text_type,
+     defenc
+ )
+-
+ import os
+ import sys
+ import re
+@@ -419,7 +418,13 @@
+         if rev is None:
+             return self.head.commit
+         else:
+-            return self.rev_parse(text_type(rev) + "^0")
++	    try:
++                return self.rev_parse(text_type(str(rev),'utf-8','replace') + "^0")
++	    except (BadName, ValueError):
++		print '[Warning]', 'BadName:', rev
++		return None
++	    except:
++	        raise
+
+     def iter_trees(self, *args, **kwargs):
+         """:return: Iterator yielding Tree objects

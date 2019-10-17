@@ -1,0 +1,3323 @@
+[
+{
+  "data": {
+    "search": {
+      "edges": [
+        {
+          "node": {
+            "owner": {
+              "login": "facebook"
+            },
+            "name": "react-native",
+            "description": "A framework for building native apps with React.",
+            "stargazers": {
+              "totalCount": 37939
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "elastic"
+            },
+            "name": "elasticsearch",
+            "description": "Open Source, Distributed, RESTful Search Engine",
+            "stargazers": {
+              "totalCount": 18499
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "google"
+            },
+            "name": "guava",
+            "description": "Google Core Libraries for Java 6+",
+            "stargazers": {
+              "totalCount": 11680
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "zxing"
+            },
+            "name": "zxing",
+            "description": "Official ZXing (\"Zebra Crossing\") project home",
+            "stargazers": {
+              "totalCount": 10483
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "spring-projects"
+            },
+            "name": "spring-framework",
+            "description": "The Spring Framework",
+            "stargazers": {
+              "totalCount": 10408
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "libgdx"
+            },
+            "name": "libgdx",
+            "description": "Desktop/Android/HTML5/iOS Java game development framework",
+            "stargazers": {
+              "totalCount": 9660
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "afollestad"
+            },
+            "name": "material-dialogs",
+            "description": "A beautiful, fluid, and customizable dialogs API.",
+            "stargazers": {
+              "totalCount": 7375
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "JetBrains"
+            },
+            "name": "kotlin",
+            "description": "The Kotlin Programming Language",
+            "stargazers": {
+              "totalCount": 5974
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "eclipse"
+            },
+            "name": "vert.x",
+            "description": "Vert.x is a tool-kit for building reactive applications on the JVM",
+            "stargazers": {
+              "totalCount": 5232
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "prestodb"
+            },
+            "name": "presto",
+            "description": "Distributed SQL query engine for big data",
+            "stargazers": {
+              "totalCount": 5124
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "android"
+            },
+            "name": "platform_frameworks_base",
+            "description": null,
+            "stargazers": {
+              "totalCount": 5070
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "bazelbuild"
+            },
+            "name": "bazel",
+            "description": "Correct, reproducible, and fast builds for everyone.",
+            "stargazers": {
+              "totalCount": 4869
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "deeplearning4j"
+            },
+            "name": "deeplearning4j",
+            "description": "Deep Learning for Java, Scala & Clojure on Hadoop & Spark With GPUs - From Skymind",
+            "stargazers": {
+              "totalCount": 4074
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "gradle"
+            },
+            "name": "gradle",
+            "description": "A powerful build system for the JVM",
+            "stargazers": {
+              "totalCount": 3953
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "OpenRefine"
+            },
+            "name": "OpenRefine",
+            "description": "OpenRefine is a free, open source power tool for working with messy data and improving it",
+            "stargazers": {
+              "totalCount": 3930
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "claritylab"
+            },
+            "name": "lucida",
+            "description": "Speech and Vision Based Intelligent Personal Assistant",
+            "stargazers": {
+              "totalCount": 3905
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "druid-io"
+            },
+            "name": "druid",
+            "description": "Column oriented distributed data store ideal for powering interactive applications",
+            "stargazers": {
+              "totalCount": 3741
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "apache"
+            },
+            "name": "storm",
+            "description": "Mirror of Apache Storm",
+            "stargazers": {
+              "totalCount": 3547
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "JetBrains"
+            },
+            "name": "intellij-community",
+            "description": "IntelliJ IDEA Community Edition",
+            "stargazers": {
+              "totalCount": 3449
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "yixia"
+            },
+            "name": "VitamioBundle",
+            "description": "Vitamio for Android",
+            "stargazers": {
+              "totalCount": 3316
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "commonsguy"
+            },
+            "name": "cw-omnibus",
+            "description": "Source code to omnibus edition of _The Busy Coder's Guide to Android Development_",
+            "stargazers": {
+              "totalCount": 3283
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "mockito"
+            },
+            "name": "mockito",
+            "description": "Mocking framework for unit tests written in Java",
+            "stargazers": {
+              "totalCount": 3148
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "facebook"
+            },
+            "name": "buck",
+            "description": "A fast build system that encourages the creation of small, reusable modules over a variety of platforms and languages.",
+            "stargazers": {
+              "totalCount": 3084
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "openhab"
+            },
+            "name": "openhab",
+            "description": "Source code of the open Home Automation Bus (openHAB)",
+            "stargazers": {
+              "totalCount": 3029
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "neo4j"
+            },
+            "name": "neo4j",
+            "description": "Graphs for Everyone",
+            "stargazers": {
+              "totalCount": 3001
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "apache"
+            },
+            "name": "cassandra",
+            "description": "Mirror of Apache Cassandra",
+            "stargazers": {
+              "totalCount": 2988
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "processing"
+            },
+            "name": "processing",
+            "description": "Source code for the Processing Development Environment (PDE)",
+            "stargazers": {
+              "totalCount": 2953
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "stephanenicolas"
+            },
+            "name": "robospice",
+            "description": "Repo of the Open Source Android library : RoboSpice. RoboSpice is a modular android library that makes writing asynchronous long running tasks easy. It is specialized in network requests, supports caching and offers REST requests out-of-the box using extension modules.",
+            "stargazers": {
+              "totalCount": 2911
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "actorapp"
+            },
+            "name": "actor-platform",
+            "description": "Actor Messaging platform",
+            "stargazers": {
+              "totalCount": 2868
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "dropbox"
+            },
+            "name": "hackpad",
+            "description": "Hackpad is a web-based realtime wiki.",
+            "stargazers": {
+              "totalCount": 2809
+            }
+          }
+        }
+      ],
+      "pageInfo": {
+        "endCursor": "MzA=",
+        "hasNextPage": true,
+        "hasPreviousPage": false
+      }
+    }
+  }
+},
+{
+  "data": {
+    "search": {
+      "edges": [
+        {
+          "node": {
+            "owner": {
+              "login": "haifengl"
+            },
+            "name": "smile",
+            "description": "Statistical Machine Intelligence & Learning Engine",
+            "stargazers": {
+              "totalCount": 2743
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "Atmosphere"
+            },
+            "name": "atmosphere",
+            "description": "Realtime Client Server Framework for the JVM, supporting WebSockets with Cross-Browser Fallbacks",
+            "stargazers": {
+              "totalCount": 2693
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "google"
+            },
+            "name": "closure-compiler",
+            "description": "A JavaScript checker and optimizer.",
+            "stargazers": {
+              "totalCount": 2647
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "orientechnologies"
+            },
+            "name": "orientdb",
+            "description": "OrientDB is the first Multi-Model DBMS with Document & Graph engine. OrientDB can run distributed (Multi-Master), supports SQL, ACID Transactions, Full-Text indexing, Reactive Queries and has a small memory footprint. OrientDB is licensed with Apache 2 license and the development is driven by OrientDB LTD and a worldwide Open Source community.",
+            "stargazers": {
+              "totalCount": 2594
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "gocd"
+            },
+            "name": "gocd",
+            "description": "Main repository for GoCD - Continuous Delivery server",
+            "stargazers": {
+              "totalCount": 2587
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "java-native-access"
+            },
+            "name": "jna",
+            "description": "Java Native Access",
+            "stargazers": {
+              "totalCount": 2537
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "qii"
+            },
+            "name": "weiciyuan",
+            "description": "Sina Weibo Android Client",
+            "stargazers": {
+              "totalCount": 2479
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "alibaba"
+            },
+            "name": "jstorm",
+            "description": "Enterprise Stream Process Engine",
+            "stargazers": {
+              "totalCount": 2409
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "twitter"
+            },
+            "name": "heron",
+            "description": "Heron is a realtime, distributed, fault-tolerant stream processing engine from Twitter",
+            "stargazers": {
+              "totalCount": 2361
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "apache"
+            },
+            "name": "hadoop",
+            "description": "Mirror of Apache Hadoop",
+            "stargazers": {
+              "totalCount": 2334
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "stanfordnlp"
+            },
+            "name": "CoreNLP",
+            "description": "Stanford CoreNLP: A Java suite of core NLP tools.",
+            "stargazers": {
+              "totalCount": 2263
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "pedrovgs"
+            },
+            "name": "DraggablePanel",
+            "description": "Android library used to create an awesome Android UI based on a draggable element similar to the last YouTube graphic component.",
+            "stargazers": {
+              "totalCount": 2245
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "NLPchina"
+            },
+            "name": "ansj_seg",
+            "description": "ansj分词.ict的真正java实现.分词效果速度都超过开源版的ict. 中文分词,人名识别,词性标注,用户自定义词典",
+            "stargazers": {
+              "totalCount": 2223
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "CellularPrivacy"
+            },
+            "name": "Android-IMSI-Catcher-Detector",
+            "description": "AIMSICD • Fight IMSI-Catcher, StingRay and silent SMS!",
+            "stargazers": {
+              "totalCount": 2214
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "naver"
+            },
+            "name": "pinpoint",
+            "description": "Pinpoint is an open source APM (Application Performance Management) tool for large-scale distributed systems written in Java. ",
+            "stargazers": {
+              "totalCount": 2208
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "lipangit"
+            },
+            "name": "JieCaoVideoPlayer",
+            "description": "Android VideoPlayer MediaPlayer VideoView MediaView Float View And Fullscreen",
+            "stargazers": {
+              "totalCount": 2070
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "h2oai"
+            },
+            "name": "h2o-2",
+            "description": "h2o = fast statistical, machine learning & math runtime for bigdata ",
+            "stargazers": {
+              "totalCount": 2059
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "hibernate"
+            },
+            "name": "hibernate-orm",
+            "description": "Hibernate's core Object/Relational Mapping functionality",
+            "stargazers": {
+              "totalCount": 2047
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "apache"
+            },
+            "name": "zeppelin",
+            "description": "Mirror of Apache Zeppelin",
+            "stargazers": {
+              "totalCount": 1956
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "google"
+            },
+            "name": "binnavi",
+            "description": "BinNavi is a binary analysis IDE that allows to inspect, navigate, edit and annotate control flow graphs and call graphs of disassembled code.",
+            "stargazers": {
+              "totalCount": 1936
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "grails"
+            },
+            "name": "grails-core",
+            "description": "The Grails Web Application Framework",
+            "stargazers": {
+              "totalCount": 1886
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "Wizcorp"
+            },
+            "name": "phonegap-facebook-plugin",
+            "description": "The official plugin for Facebook in Apache Cordova/PhoneGap",
+            "stargazers": {
+              "totalCount": 1876
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "owncloud"
+            },
+            "name": "android",
+            "description": ":phone: The ownCloud Android App",
+            "stargazers": {
+              "totalCount": 1834
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "cymcsg"
+            },
+            "name": "UltimateAndroid",
+            "description": "UltimateAndroid is a rapid development framework for developing your apps",
+            "stargazers": {
+              "totalCount": 1814
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "apereo"
+            },
+            "name": "cas",
+            "description": "Apereo CAS - Enterprise Single Sign On for all",
+            "stargazers": {
+              "totalCount": 1790
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "voldemort"
+            },
+            "name": "voldemort",
+            "description": "An open source clone of Amazon's Dynamo.",
+            "stargazers": {
+              "totalCount": 1765
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "hazelcast"
+            },
+            "name": "hazelcast",
+            "description": "Open Source In-Memory Data Grid",
+            "stargazers": {
+              "totalCount": 1728
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "wildfly"
+            },
+            "name": "wildfly",
+            "description": "WildFly Application Server",
+            "stargazers": {
+              "totalCount": 1693
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "bigbluebutton"
+            },
+            "name": "bigbluebutton",
+            "description": "BigBlueButton is an open source web conferencing system for on-line learning.",
+            "stargazers": {
+              "totalCount": 1645
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "xcltapestry"
+            },
+            "name": "XCL-Charts",
+            "description": "Android图表库(XCL-Charts is a free charting library for Android platform.),基于Android Canvas来绘制各种图表,使用简便,定制灵活。目前支持3D/非3D/背向式/横向/竖向柱形图(Bar Chart)、3D/非3D饼图(Pie Chart)、堆叠图(Stacked Bar Chart)、面积图(Area Chart)、 折线图(Line Chart)、曲线图(Spline Chart)、环形图(Dount Chart)、南丁格尔玫瑰图(Rose Chart)、仪表盘(Dial Chart)、刻度盘(Gauge Chart)、雷达图(Radar Chart)、漏斗图(Funnel Chart)、圆形图(Circle Chart)、弧线比较图、散点图(Scatter Chart)、气泡图(Bubble Chart)、范围条形图(RangeBar Chart)等图表。其它特性还包括支持图表缩放、手势移动、点击响应、动画效果、多轴显示、图表参考线、混合图表及同数据源不同图表类型切换等。",
+            "stargazers": {
+              "totalCount": 1633
+            }
+          }
+        }
+      ],
+      "pageInfo": {
+        "endCursor": "NjA=",
+        "hasNextPage": true,
+        "hasPreviousPage": true
+      }
+    }
+  }
+},
+{
+  "data": {
+    "search": {
+      "edges": [
+        {
+          "node": {
+            "owner": {
+              "login": "MovingBlocks"
+            },
+            "name": "Terasology",
+            "description": "Terasology - open source voxel world",
+            "stargazers": {
+              "totalCount": 1622
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "robovm"
+            },
+            "name": "robovm",
+            "description": "For more info see",
+            "stargazers": {
+              "totalCount": 1612
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "gephi"
+            },
+            "name": "gephi",
+            "description": "Gephi - The Open Graph Viz Platform",
+            "stargazers": {
+              "totalCount": 1610
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "zaproxy"
+            },
+            "name": "zaproxy",
+            "description": "The OWASP ZAP core project",
+            "stargazers": {
+              "totalCount": 1597
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "apache"
+            },
+            "name": "flink",
+            "description": "Mirror of Apache Flink",
+            "stargazers": {
+              "totalCount": 1594
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "aws"
+            },
+            "name": "aws-sdk-java",
+            "description": "The official AWS SDK for Java.",
+            "stargazers": {
+              "totalCount": 1589
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "MinecraftForge"
+            },
+            "name": "MinecraftForge",
+            "description": "Modifications to the Minecraft base files to assist in compatibility between mods.",
+            "stargazers": {
+              "totalCount": 1536
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "eishay"
+            },
+            "name": "jvm-serializers",
+            "description": "Benchmark comparing serialization libraries on the JVM ",
+            "stargazers": {
+              "totalCount": 1501
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "konifar"
+            },
+            "name": "android-material-design-icon-generator-plugin",
+            "description": "This plugin help you to set material design icon to your project.",
+            "stargazers": {
+              "totalCount": 1488
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "groovy"
+            },
+            "name": "groovy-core",
+            "description": "former home of the groovy programming language, moved to https://github.com/apache/groovy",
+            "stargazers": {
+              "totalCount": 1468
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "danylovolokh"
+            },
+            "name": "VideoPlayerManager",
+            "description": "This is a project designed to help controlling Android MediaPlayer class. It makes it easier to use MediaPlayer ListView and RecyclerView. Also it tracks the most visible item in scrolling list. When new item in the list become the most visible, this library gives an API to track it.",
+            "stargazers": {
+              "totalCount": 1454
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "lawloretienne"
+            },
+            "name": "QuickReturn",
+            "description": "Showcases QuickReturn UI Pattern as either a header, footer, or both header and footer",
+            "stargazers": {
+              "totalCount": 1414
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "apache"
+            },
+            "name": "groovy",
+            "description": "Mirror of Apache Groovy",
+            "stargazers": {
+              "totalCount": 1402
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "jOOQ"
+            },
+            "name": "jOOQ",
+            "description": "jOOQ is an innovative solution for a better integration of Java applications with popular databases like Oracle, Microsoft SQL Server, IBM DB2, or SAP Sybase. When using jOOQ, our customers benefit from a significant added value and ROI as their software developers can express database queries in a much simpler and faster way. From our experience, this leads to a 10% - 20% decrease of programming effort, which again leads to higher quality and to a lower error rate in program code, and thus in the entire application.",
+            "stargazers": {
+              "totalCount": 1381
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "linkedin"
+            },
+            "name": "pinot",
+            "description": "A realtime distributed OLAP datastore",
+            "stargazers": {
+              "totalCount": 1348
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "h2oai"
+            },
+            "name": "h2o-3",
+            "description": "Open Source Fast Scalable Machine Learning API For Smarter Applications (Deep Learning, Gradient Boosting, Random Forest, Generalized Linear Modeling (Logistic Regression, Elastic Net), K-Means, PCA...)",
+            "stargazers": {
+              "totalCount": 1343
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "brianfrankcooper"
+            },
+            "name": "YCSB",
+            "description": "Yahoo! Cloud Serving Benchmark",
+            "stargazers": {
+              "totalCount": 1325
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "Konloch"
+            },
+            "name": "bytecode-viewer",
+            "description": "A Java 8 Jar & Android APK Reverse Engineering Suite (Decompiler, Editor, Debugger & More)",
+            "stargazers": {
+              "totalCount": 1324
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "SonarSource"
+            },
+            "name": "sonarqube",
+            "description": "Put your technical debt under control",
+            "stargazers": {
+              "totalCount": 1284
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "wordpress-mobile"
+            },
+            "name": "WordPress-Android",
+            "description": "WordPress for Android",
+            "stargazers": {
+              "totalCount": 1277
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "xamarin"
+            },
+            "name": "XobotOS",
+            "description": "XobotOS - Android ported to C#",
+            "stargazers": {
+              "totalCount": 1269
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "killbill"
+            },
+            "name": "killbill",
+            "description": "Open-Source Subscription Billing & Payment Platform",
+            "stargazers": {
+              "totalCount": 1204
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "twitter"
+            },
+            "name": "commons",
+            "description": "Twitter common libraries for python and the JVM",
+            "stargazers": {
+              "totalCount": 1197
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "jMonkeyEngine"
+            },
+            "name": "jmonkeyengine",
+            "description": "A complete 3D game development suite written purely in Java.",
+            "stargazers": {
+              "totalCount": 1151
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "geometer"
+            },
+            "name": "FBReaderJ",
+            "description": "Official FBReaderJ project repository",
+            "stargazers": {
+              "totalCount": 1137
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "raphw"
+            },
+            "name": "byte-buddy",
+            "description": "Runtime code generation for the Java virtual machine.",
+            "stargazers": {
+              "totalCount": 1116
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "UweTrottmann"
+            },
+            "name": "SeriesGuide",
+            "description": "Keep track of your favorite TV shows and movies on your Android devices.",
+            "stargazers": {
+              "totalCount": 1078
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "jitsi"
+            },
+            "name": "jitsi",
+            "description": "Jitsi is an audio/video and chat communicator that supports protocols such as SIP, XMPP/Jabber, AIM/ICQ, IRC, Yahoo! and many other useful features.",
+            "stargazers": {
+              "totalCount": 1061
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "apache"
+            },
+            "name": "hive",
+            "description": "Mirror of Apache Hive",
+            "stargazers": {
+              "totalCount": 1059
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "pcpratts"
+            },
+            "name": "rootbeer1",
+            "description": "Rootbeer GPU Compiler - Java GPU Programming",
+            "stargazers": {
+              "totalCount": 1040
+            }
+          }
+        }
+      ],
+      "pageInfo": {
+        "endCursor": "OTA=",
+        "hasNextPage": true,
+        "hasPreviousPage": true
+      }
+    }
+  }
+},
+{
+  "data": {
+    "search": {
+      "edges": [
+        {
+          "node": {
+            "owner": {
+              "login": "eclipse"
+            },
+            "name": "jetty.project",
+            "description": "Eclipse Jetty - Web Container & Clients - supports HTTP/2, HTTP/1.1, HTTP/1.0, websocket, servlets, and more",
+            "stargazers": {
+              "totalCount": 1011
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "liquibase"
+            },
+            "name": "liquibase",
+            "description": "Main Liquibase Source",
+            "stargazers": {
+              "totalCount": 983
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "graphhopper"
+            },
+            "name": "graphhopper",
+            "description": "Open source routing library and server using OpenStreetMap. #route #planner",
+            "stargazers": {
+              "totalCount": 959
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "serge-rider"
+            },
+            "name": "dbeaver",
+            "description": "Free universal database manager and SQL client",
+            "stargazers": {
+              "totalCount": 963
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "TwidereProject"
+            },
+            "name": "Twidere-Android",
+            "description": "",
+            "stargazers": {
+              "totalCount": 951
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "apache"
+            },
+            "name": "camel",
+            "description": "Mirror of Apache Camel",
+            "stargazers": {
+              "totalCount": 941
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "CrawlScript"
+            },
+            "name": "WebCollector",
+            "description": "WebCollector is an open source web crawler framework based on Java.It provides some simple interfaces for crawling the Web,you can setup a multi-threaded web crawler in less than 5 minutes.",
+            "stargazers": {
+              "totalCount": 932
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "liferay"
+            },
+            "name": "liferay-portal",
+            "description": "",
+            "stargazers": {
+              "totalCount": 926
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "moagrius"
+            },
+            "name": "TileView",
+            "description": "TileView is a subclass of android.view.ViewGroup that asynchronously displays tile-based images, with pan and zoom functionality, and support for features like markers, hotspots, paths, multiple levels of detail, and arbitrary coordinate systems.",
+            "stargazers": {
+              "totalCount": 919
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "igniterealtime"
+            },
+            "name": "Openfire",
+            "description": "A XMPP server licensed under the Open Source Apache License.",
+            "stargazers": {
+              "totalCount": 917
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "osmandapp"
+            },
+            "name": "Osmand",
+            "description": "osmand",
+            "stargazers": {
+              "totalCount": 903
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "opentripplanner"
+            },
+            "name": "OpenTripPlanner",
+            "description": "An open source multi-modal trip planner",
+            "stargazers": {
+              "totalCount": 897
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "languagetool-org"
+            },
+            "name": "languagetool",
+            "description": "Style and Grammar Checker for 25+ Languages",
+            "stargazers": {
+              "totalCount": 883
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "card-io"
+            },
+            "name": "card.io-Android-SDK",
+            "description": "card.io provides fast, easy credit card scanning in mobile apps",
+            "stargazers": {
+              "totalCount": 899
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "alibaba"
+            },
+            "name": "mdrill",
+            "description": "for千亿数据即席分析",
+            "stargazers": {
+              "totalCount": 877
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "apache"
+            },
+            "name": "hbase",
+            "description": "Mirror of Apache HBase",
+            "stargazers": {
+              "totalCount": 873
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "VoltDB"
+            },
+            "name": "voltdb",
+            "description": "VoltDB",
+            "stargazers": {
+              "totalCount": 865
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "apache"
+            },
+            "name": "nutch",
+            "description": "Mirror of Apache Nutch",
+            "stargazers": {
+              "totalCount": 833
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "MizzleDK"
+            },
+            "name": "Mizuu",
+            "description": "Popular media indexer app for Android.",
+            "stargazers": {
+              "totalCount": 832
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "BroadleafCommerce"
+            },
+            "name": "BroadleafCommerce",
+            "description": "Broadleaf Commerce - Enterprise eCommerce framework based on Spring",
+            "stargazers": {
+              "totalCount": 800
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "android-cn"
+            },
+            "name": "android-open-project-demo",
+            "description": "Demo of android open source project, 微信公众号:codekk, 网站:",
+            "stargazers": {
+              "totalCount": 799
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "lopspower"
+            },
+            "name": "CircularFillableLoaders",
+            "description": "Realize a beautiful circular fillable loaders to be used for splashscreen",
+            "stargazers": {
+              "totalCount": 765
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "jeeeyul"
+            },
+            "name": "eclipse-themes",
+            "description": "Full Featured Eclipse Theme Customizer!",
+            "stargazers": {
+              "totalCount": 763
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "fabric8io"
+            },
+            "name": "fabric8",
+            "description": "fabric8 is an open source microservices platform based on Docker, Kubernetes and Jenkins",
+            "stargazers": {
+              "totalCount": 742
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "vaadin"
+            },
+            "name": "vaadin",
+            "description": "Vaadin is a Java framework for building modern web applications that look great, perform well and make you and your users happy.",
+            "stargazers": {
+              "totalCount": 741
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "linkedin"
+            },
+            "name": "gobblin",
+            "description": "Universal data ingestion framework for Hadoop.",
+            "stargazers": {
+              "totalCount": 718
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "JetBrains"
+            },
+            "name": "MPS",
+            "description": "JetBrains Meta programming System",
+            "stargazers": {
+              "totalCount": 713
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "cgeo"
+            },
+            "name": "cgeo",
+            "description": "c:geo - The powerful Android geocaching app.",
+            "stargazers": {
+              "totalCount": 710
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "gwtproject"
+            },
+            "name": "gwt",
+            "description": "GWT Open Source Project",
+            "stargazers": {
+              "totalCount": 704
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "pentaho"
+            },
+            "name": "pentaho-kettle",
+            "description": "Pentaho Data Integration ( ETL ) a.k.a Kettle",
+            "stargazers": {
+              "totalCount": 703
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "playgameservices"
+            },
+            "name": "android-basic-samples",
+            "description": "Google Play game services - Android samples",
+            "stargazers": {
+              "totalCount": 701
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "droolsjbpm"
+            },
+            "name": "drools",
+            "description": "Drools Expert is the rule engine and Drools Fusion does complex event processing (CEP).",
+            "stargazers": {
+              "totalCount": 700
+            }
+          }
+        }
+      ],
+      "pageInfo": {
+        "endCursor": "MTIw",
+        "hasNextPage": true,
+        "hasPreviousPage": true
+      }
+    }
+  }
+},
+{
+  "data": {
+    "search": {
+      "edges": [
+        {
+          "node": {
+            "owner": {
+              "login": "keycloak"
+            },
+            "name": "keycloak",
+            "description": "Open Source Identity and Access Management For Modern Applications and Services",
+            "stargazers": {
+              "totalCount": 709
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "deeplearning4j"
+            },
+            "name": "nd4j",
+            "description": "Fast, Scientific and Numerical Computing for the JVM (NDArrays)",
+            "stargazers": {
+              "totalCount": 709
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "FudanNLP"
+            },
+            "name": "fnlp",
+            "description": "中文自然语言处理工具包 Toolkit for Chinese natural language processing",
+            "stargazers": {
+              "totalCount": 697
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "OpenHFT"
+            },
+            "name": "Chronicle-Map",
+            "description": "Replicate your Key Value Store across your network, with consistency, persistance and performance.",
+            "stargazers": {
+              "totalCount": 692
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "apache"
+            },
+            "name": "usergrid",
+            "description": "Mirror of Apache Usergrid",
+            "stargazers": {
+              "totalCount": 690
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "winterDroid"
+            },
+            "name": "android-drawable-importer-intellij-plugin",
+            "description": "Adds an option to IntelliJ to import drawables in different resolutions from AndroidIcons, own \"drawable repos\" and scale a certain image down/up to the defined resolutions.",
+            "stargazers": {
+              "totalCount": 680
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "ankidroid"
+            },
+            "name": "Anki-Android",
+            "description": "AnkiDroid: Anki on Android",
+            "stargazers": {
+              "totalCount": 680
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "geoserver"
+            },
+            "name": "geoserver",
+            "description": "Official GeoServer repository",
+            "stargazers": {
+              "totalCount": 670
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "seven332"
+            },
+            "name": "EhViewer",
+            "description": "An Unofficial E-Hentai Application for Android",
+            "stargazers": {
+              "totalCount": 650
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "apache"
+            },
+            "name": "incubator-geode",
+            "description": "Mirror of Apache Geode (Incubating)",
+            "stargazers": {
+              "totalCount": 627
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "zhaoqp2010"
+            },
+            "name": "andbase",
+            "description": "andbase快速开发框架",
+            "stargazers": {
+              "totalCount": 622
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "apache"
+            },
+            "name": "kylin",
+            "description": "Mirror of Apache Kylin",
+            "stargazers": {
+              "totalCount": 610
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "apache"
+            },
+            "name": "jmeter",
+            "description": "Mirror of Apache JMeter",
+            "stargazers": {
+              "totalCount": 605
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "GoClipse"
+            },
+            "name": "goclipse",
+            "description": "Eclipse IDE for the Go programming language:",
+            "stargazers": {
+              "totalCount": 602
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "RaiMan"
+            },
+            "name": "SikuliX-2014",
+            "description": "Sikuli version 1.1 as Maven multi-module setup ",
+            "stargazers": {
+              "totalCount": 595
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "danikula"
+            },
+            "name": "AndroidVideoCache",
+            "description": "Cache support for any video player with help of single line",
+            "stargazers": {
+              "totalCount": 589
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "apache"
+            },
+            "name": "ignite",
+            "description": "Mirror of Apache Ignite",
+            "stargazers": {
+              "totalCount": 579
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "plutext"
+            },
+            "name": "docx4j",
+            "description": "JAXB-based Java library for Word docx, Powerpoint pptx, and Excel xlsx files",
+            "stargazers": {
+              "totalCount": 577
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "ccrama"
+            },
+            "name": "Slide",
+            "description": "Slide is an open sourced, ad free Reddit browser for Android",
+            "stargazers": {
+              "totalCount": 569
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "caoxinyu"
+            },
+            "name": "RedisClient",
+            "description": "Java Redis Client GUI Tool",
+            "stargazers": {
+              "totalCount": 567
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "cmusphinx"
+            },
+            "name": "sphinx4",
+            "description": "Pure Java speech recognition library",
+            "stargazers": {
+              "totalCount": 556
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "droolsjbpm"
+            },
+            "name": "optaplanner",
+            "description": "Java planning engine: OptaPlanner optimizes business resource scheduling and planning.",
+            "stargazers": {
+              "totalCount": 540
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "forcedotcom"
+            },
+            "name": "phoenix",
+            "description": "",
+            "stargazers": {
+              "totalCount": 540
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "Sable"
+            },
+            "name": "soot",
+            "description": "Soot - A Java optimization framework",
+            "stargazers": {
+              "totalCount": 537
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "applidium"
+            },
+            "name": "PokemonGo_Android_RE",
+            "description": null,
+            "stargazers": {
+              "totalCount": 530
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "KylinOLAP"
+            },
+            "name": "Kylin",
+            "description": "This code base is retained for historical interest only, please visit Apache Incubator Repo for latest one",
+            "stargazers": {
+              "totalCount": 523
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "JetBrains"
+            },
+            "name": "intellij-plugins",
+            "description": "Open-source plugins included in the distribution of IntelliJ IDEA Ultimate and other IDEs based on the IntelliJ Platform",
+            "stargazers": {
+              "totalCount": 521
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "essentials"
+            },
+            "name": "Essentials",
+            "description": "Essentials - Minecraft server command mod - Adds over 100 commands for use in-game to help manage a server",
+            "stargazers": {
+              "totalCount": 513
+            }
+          }
+        }
+      ],
+      "pageInfo": {
+        "endCursor": "MTUw",
+        "hasNextPage": true,
+        "hasPreviousPage": true
+      }
+    }
+  }
+},
+{
+  "data": {
+    "search": {
+      "edges": [
+        {
+          "node": {
+            "owner": {
+              "login": "modesty"
+            },
+            "name": "pdf2json",
+            "description": "A PDF file parser that converts PDF binaries to text based JSON, powered by a fork of PDF.JS",
+            "stargazers": {
+              "totalCount": 505
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "jclouds"
+            },
+            "name": "legacy-jclouds",
+            "description": "jclouds is an open source library that helps you get started in the cloud and reuse your java development skills. Our api allows you to freedom to use portable abstractions or cloud-specific features. We support many clouds including Amazon, VMWare, Azure, and Rackspace.",
+            "stargazers": {
+              "totalCount": 501
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "liferay"
+            },
+            "name": "liferay-plugins",
+            "description": null,
+            "stargazers": {
+              "totalCount": 499
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "infinispan"
+            },
+            "name": "infinispan",
+            "description": "Infinispan is an open source data grid platform and highly scalable NoSQL cloud data store.",
+            "stargazers": {
+              "totalCount": 497
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "googlesamples"
+            },
+            "name": "io2015-codelabs",
+            "description": "codelabs for Google I/O 2015",
+            "stargazers": {
+              "totalCount": 493
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "apache"
+            },
+            "name": "lucene-solr",
+            "description": "Mirror of Apache Lucene + Solr",
+            "stargazers": {
+              "totalCount": 493
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "methusalah"
+            },
+            "name": "OpenRTS",
+            "description": "Real-Time Strategy game 3D engine coded in java 7",
+            "stargazers": {
+              "totalCount": 484
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "eucalyptus"
+            },
+            "name": "eucalyptus",
+            "description": "Eucalyptus Cloud-computing Platform",
+            "stargazers": {
+              "totalCount": 481
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "marytts"
+            },
+            "name": "marytts",
+            "description": "MARY TTS -- an open-source, multilingual text-to-speech synthesis system written in pure java",
+            "stargazers": {
+              "totalCount": 478
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "restlet"
+            },
+            "name": "restlet-framework-java",
+            "description": "Leading RESTful web API framework for Java",
+            "stargazers": {
+              "totalCount": 475
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "kaaproject"
+            },
+            "name": "kaa",
+            "description": "Kaa open-source middleware platform for building, managing, and integrating connected products with the Internet of Everything.",
+            "stargazers": {
+              "totalCount": 473
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "myui"
+            },
+            "name": "hivemall",
+            "description": "Scalable machine learning library for Hive/Hadoop",
+            "stargazers": {
+              "totalCount": 468
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "alexo"
+            },
+            "name": "wro4j",
+            "description": "New project location is:https://github.com/wro4j/wro4j",
+            "stargazers": {
+              "totalCount": 465
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "aimacode"
+            },
+            "name": "aima-java",
+            "description": "Java implementation of algorithms from Russell And Norvig's \"Artificial Intelligence - A Modern Approach\"",
+            "stargazers": {
+              "totalCount": 461
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "bitsquare"
+            },
+            "name": "bitsquare",
+            "description": "The decentralized bitcoin exchange",
+            "stargazers": {
+              "totalCount": 460
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "ysc"
+            },
+            "name": "word",
+            "description": "Java分布式中文分词组件 - word分词",
+            "stargazers": {
+              "totalCount": 459
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "onepf"
+            },
+            "name": "OpenIAB",
+            "description": "Open In-App Billing for Google Play, SlideMe, Amazon Store, Nokia Store, Samsung Apps, Yandex.Store, Appland, Aptoide, AppMall and Fortumo.",
+            "stargazers": {
+              "totalCount": 448
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "infinitest"
+            },
+            "name": "infinitest",
+            "description": "A Continuous Test Runner for Java",
+            "stargazers": {
+              "totalCount": 436
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "apache"
+            },
+            "name": "ambari",
+            "description": "Mirror of Apache Ambari",
+            "stargazers": {
+              "totalCount": 434
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "mgarin"
+            },
+            "name": "weblaf",
+            "description": "WebLaF - Java Look and Feel library for cross-platform Swing applications",
+            "stargazers": {
+              "totalCount": 431
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "gwtbootstrap"
+            },
+            "name": "gwt-bootstrap",
+            "description": "A GWT Library that provides the widgets of Bootstrap, from Twitter.",
+            "stargazers": {
+              "totalCount": 426
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "openhab"
+            },
+            "name": "openhab2-addons",
+            "description": "The next-generation open Home Automation Bus (openHAB)",
+            "stargazers": {
+              "totalCount": 426
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "CameloeAnthony"
+            },
+            "name": "Ant",
+            "description": "Example project inspired by Trinea's android-common project using new techs which make your architecting of android apps quicker and smoother ,long-term maintenance by Anthony.",
+            "stargazers": {
+              "totalCount": 424
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "apache"
+            },
+            "name": "ofbiz",
+            "description": "Mirror of Apache OFBiz",
+            "stargazers": {
+              "totalCount": 422
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "pentaho"
+            },
+            "name": "mondrian",
+            "description": "Mondrian is an Online Analytical Processing (OLAP) server that enables business users to analyze large quantities of data in real-time.",
+            "stargazers": {
+              "totalCount": 422
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "anggrayudi"
+            },
+            "name": "android-hidden-api",
+            "description": "A library that provides access to Android hidden API and internal resources.",
+            "stargazers": {
+              "totalCount": 421
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "xerial"
+            },
+            "name": "sqlite-jdbc",
+            "description": "SQLite JDBC Driver",
+            "stargazers": {
+              "totalCount": 420
+            }
+          }
+        }
+      ],
+      "pageInfo": {
+        "endCursor": "MTgw",
+        "hasNextPage": true,
+        "hasPreviousPage": true
+      }
+    }
+  }
+},
+{
+  "data": {
+    "search": {
+      "edges": [
+        {
+          "node": {
+            "owner": {
+              "login": "NLPIR-team"
+            },
+            "name": "NLPIR",
+            "description": null,
+            "stargazers": {
+              "totalCount": 416
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "Libresonic"
+            },
+            "name": "libresonic",
+            "description": "Media streaming software",
+            "stargazers": {
+              "totalCount": 415
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "consulo"
+            },
+            "name": "consulo",
+            "description": "Platform repository of Consulo. Plugins implementation hold in their repositories",
+            "stargazers": {
+              "totalCount": 414
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "apache"
+            },
+            "name": "incubator-systemml",
+            "description": "Mirror of Apache SystemML (Incubating)",
+            "stargazers": {
+              "totalCount": 413
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "apache"
+            },
+            "name": "cloudstack",
+            "description": "Mirror of Apache Cloudstack",
+            "stargazers": {
+              "totalCount": 408
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "intel-hadoop"
+            },
+            "name": "HiBench",
+            "description": "HiBench is a big data benchmark suite.",
+            "stargazers": {
+              "totalCount": 406
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "codenameone"
+            },
+            "name": "CodenameOne",
+            "description": "Write once run anywhere native mobile apps using a subset of Java 8",
+            "stargazers": {
+              "totalCount": 406
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "caelum"
+            },
+            "name": "vraptor",
+            "description": "Simple Java Web MVC Framework",
+            "stargazers": {
+              "totalCount": 405
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "CyanogenMod"
+            },
+            "name": "android_packages_apps_Trebuchet",
+            "description": "Trebuchet Launcher",
+            "stargazers": {
+              "totalCount": 404
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "structr"
+            },
+            "name": "structr",
+            "description": "The Neo4j Workbench",
+            "stargazers": {
+              "totalCount": 401
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "shopizer-ecommerce"
+            },
+            "name": "shopizer",
+            "description": "Shopizer java e-commerce software",
+            "stargazers": {
+              "totalCount": 398
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "floodlight"
+            },
+            "name": "floodlight",
+            "description": "Floodlight SDN OpenFlow Controller",
+            "stargazers": {
+              "totalCount": 393
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "haraldk"
+            },
+            "name": "TwelveMonkeys",
+            "description": "TwelveMonkeys ImageIO: Additional plug-ins and extensions for Java's ImageIO",
+            "stargazers": {
+              "totalCount": 392
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "rarnu"
+            },
+            "name": "root-tools",
+            "description": null,
+            "stargazers": {
+              "totalCount": 391
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "wseemann"
+            },
+            "name": "FFmpegMediaMetadataRetriever",
+            "description": "FFmpegMediaMetadataRetriever provides a unified interface for retrieving frame and meta data from an input media file.",
+            "stargazers": {
+              "totalCount": 389
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "zhuowei"
+            },
+            "name": "MCPELauncher",
+            "description": "Issue tracker for BlockLauncher, a launcher that patches Minecraft Pocket Edition for Android",
+            "stargazers": {
+              "totalCount": 389
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "magefree"
+            },
+            "name": "mage",
+            "description": "Magic Another Game Engine",
+            "stargazers": {
+              "totalCount": 385
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "mulesoft"
+            },
+            "name": "mule",
+            "description": "Mule Community Edition",
+            "stargazers": {
+              "totalCount": 381
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "honeynet"
+            },
+            "name": "apkinspector",
+            "description": "APKinspector is a powerful GUI tool for analysts to analyze the Android applications.",
+            "stargazers": {
+              "totalCount": 377
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "openmrs"
+            },
+            "name": "openmrs-core",
+            "description": "OpenMRS API and web application code",
+            "stargazers": {
+              "totalCount": 376
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "owntracks"
+            },
+            "name": "android",
+            "description": "OwnTracks Android App",
+            "stargazers": {
+              "totalCount": 371
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "apache"
+            },
+            "name": "tika",
+            "description": "Mirror of Apache Tika",
+            "stargazers": {
+              "totalCount": 367
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "JabRef"
+            },
+            "name": "jabref",
+            "description": "Graphical Java application for managing BibTeX and BibLaTeX (.bib) databases",
+            "stargazers": {
+              "totalCount": 363
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "ddf"
+            },
+            "name": "Minim",
+            "description": "A Java audio library, designed to be used with Processing.",
+            "stargazers": {
+              "totalCount": 361
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "banq"
+            },
+            "name": "jdonframework",
+            "description": " DDD CQRS EventSourcing  framework for Java",
+            "stargazers": {
+              "totalCount": 360
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "google"
+            },
+            "name": "caja",
+            "description": "Caja is a tool for safely embedding third party HTML, CSS and JavaScript in your website.",
+            "stargazers": {
+              "totalCount": 360
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "itext"
+            },
+            "name": "itextpdf",
+            "description": "Core Java Library + PDF/A, xtra and XML Worker",
+            "stargazers": {
+              "totalCount": 359
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "afrous"
+            },
+            "name": "Cynthia",
+            "description": "一个开源的bug管理系统",
+            "stargazers": {
+              "totalCount": 358
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "mogoweb"
+            },
+            "name": "chromium_webview",
+            "description": "Android WebView wrapper based on chromium",
+            "stargazers": {
+              "totalCount": 355
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "appfuse"
+            },
+            "name": "appfuse",
+            "description": "AppFuse is a full-stack framework for building web applications on the JVM. Open source since 2003.",
+            "stargazers": {
+              "totalCount": 351
+            }
+          }
+        }
+      ],
+      "pageInfo": {
+        "endCursor": "MjEw",
+        "hasNextPage": true,
+        "hasPreviousPage": true
+      }
+    }
+  }
+},
+{
+  "data": {
+    "search": {
+      "edges": [
+        {
+          "node": {
+            "owner": {
+              "login": "keepkey"
+            },
+            "name": "multibit",
+            "description": "MultiBit is a desktop bitcoin client, powered by bitcoinj",
+            "stargazers": {
+              "totalCount": 347
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "hangum"
+            },
+            "name": "TadpoleForDBTools",
+            "description": "Tadpole DB Hub is unified infrastructure tool, various environment based interface for managing Amazon RDS, Altibase, Apache Hive, Apache Tajo, CUBRID, MariaDB, MySQL, Oracle, SQLite, Tibero, MSSQL, PostgreSQL and MongoDB databases.",
+            "stargazers": {
+              "totalCount": 345
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "apache"
+            },
+            "name": "wicket",
+            "description": "Mirror of Apache Wicket",
+            "stargazers": {
+              "totalCount": 343
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "mahmoudparsian"
+            },
+            "name": "data-algorithms-book",
+            "description": " MapReduce, Spark, Java, and Scala for Data Algorithms Book",
+            "stargazers": {
+              "totalCount": 343
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "ftctechnh"
+            },
+            "name": "ftc_app",
+            "description": "FTC Android Studio project to create FTC Robot Controller app.",
+            "stargazers": {
+              "totalCount": 340
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "geotools"
+            },
+            "name": "geotools",
+            "description": "Official GeoTools repository",
+            "stargazers": {
+              "totalCount": 338
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "winghc"
+            },
+            "name": "hadoop2x-eclipse-plugin",
+            "description": "eclipse plugin for hadoop 2.2.0 , 2.4.1",
+            "stargazers": {
+              "totalCount": 331
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "ArcBees"
+            },
+            "name": "GWTP",
+            "description": "A complete model-view-presenter framework to simplify your next GWT project.",
+            "stargazers": {
+              "totalCount": 325
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "CIDARLAB"
+            },
+            "name": "cello",
+            "description": "Genetic circuit design automation",
+            "stargazers": {
+              "totalCount": 324
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "crawljax"
+            },
+            "name": "crawljax",
+            "description": "Crawljax: Crawling JavaScript-based Ajax Web Applications",
+            "stargazers": {
+              "totalCount": 321
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "psal"
+            },
+            "name": "anonymouth",
+            "description": null,
+            "stargazers": {
+              "totalCount": 321
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "MyCollab"
+            },
+            "name": "mycollab",
+            "description": "An open source, free, high performance, stable and secure Java Application Business Platform of Project Management, CRM and Document",
+            "stargazers": {
+              "totalCount": 317
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "i2p"
+            },
+            "name": "i2p.i2p",
+            "description": "I2P is an anonymizing network, offering a simple layer that identity-sensitive applications can use to securely communicate. All data is wrapped with several layers of encryption, and the network is both distributed and dynamic, with no trusted parties. This is a mirror of the official Monotone repository.",
+            "stargazers": {
+              "totalCount": 316
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "MirakelX"
+            },
+            "name": "mirakel-android",
+            "description": "Easy task management for professionals",
+            "stargazers": {
+              "totalCount": 309
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "CloudifySource"
+            },
+            "name": "cloudify",
+            "description": "Cloud-enablement platform that on-boards applications to public and private clouds without architectural or code changes",
+            "stargazers": {
+              "totalCount": 309
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "mrmaffen"
+            },
+            "name": "vlc-android-sdk",
+            "description": "VLC Android SDK pushed to Maven Central. Primarily used in project tomahawk-android.",
+            "stargazers": {
+              "totalCount": 296
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "jitsi"
+            },
+            "name": "jitsi-videobridge",
+            "description": "Jitsi Videobridge is an XMPP server component that allows for multiuser video communication. Unlike the expensive dedicated hardware videobridges, Jitsi Videobridge does not mix the video channels into a composite video stream, but only relays the received video channels to all call participants. Therefore, while it does need to run on a server with good network bandwidth, CPU horsepower is not that critical for performance. ",
+            "stargazers": {
+              "totalCount": 296
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "Graphify"
+            },
+            "name": "graphify",
+            "description": "Graphify is a Neo4j unmanaged extension used for document and text classification using graph-based hierarchical pattern recognition.",
+            "stargazers": {
+              "totalCount": 294
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "wro4j"
+            },
+            "name": "wro4j",
+            "description": "Free and Open Source Java project which brings together almost all the modern web tools: JsHint, CssLint, JsMin, Google Closure compressor, YUI Compressor, UglifyJs, Dojo Shrinksafe, Css Variables Support, JSON Compression, Less, Sass, CoffeeScript and much more. In the same time, the aim is to keep it as simple as possible and as extensible as possible in order to be easily adapted to application specific needs.",
+            "stargazers": {
+              "totalCount": 292
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "owncloud"
+            },
+            "name": "News-Android-App",
+            "description": null,
+            "stargazers": {
+              "totalCount": 290
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "noinnion"
+            },
+            "name": "newsplus",
+            "description": "News+ is a simple, fast and intuitive feed/rss reader for Android, featuring beautiful themes, podcast support and full offline support.",
+            "stargazers": {
+              "totalCount": 288
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "groovy"
+            },
+            "name": "groovy-eclipse",
+            "description": "Groovy-Eclipse",
+            "stargazers": {
+              "totalCount": 285
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "neo4j-contrib"
+            },
+            "name": "neo4j-mazerunner",
+            "description": "Mazerunner extends a Neo4j graph database to run scheduled big data graph compute algorithms at scale with HDFS and Apache Spark.",
+            "stargazers": {
+              "totalCount": 285
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "pubnub"
+            },
+            "name": "java",
+            "description": "PubNub Java-based APIs for core Java, Android",
+            "stargazers": {
+              "totalCount": 282
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "SmartBear"
+            },
+            "name": "soapui",
+            "description": "SoapUI is a free and open source cross-platform functional testing solution for APIs and web services.",
+            "stargazers": {
+              "totalCount": 281
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "getlantern"
+            },
+            "name": "firetweet",
+            "description": "FireTweet for Android powered by Lantern",
+            "stargazers": {
+              "totalCount": 280
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "tamingtext"
+            },
+            "name": "book",
+            "description": "Taming Text Book Source Code",
+            "stargazers": {
+              "totalCount": 280
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "chromium"
+            },
+            "name": "dom-distiller",
+            "description": "Distills the DOM",
+            "stargazers": {
+              "totalCount": 278
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "jimwebber"
+            },
+            "name": "neo4j-tutorial",
+            "description": "A koan-style tutorial in Java for Neo4j",
+            "stargazers": {
+              "totalCount": 278
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "CloudStack-extras"
+            },
+            "name": "CloudStack-archive",
+            "description": "DEPRECATED & read-only!! - This repo exists for GPL compliance only. CloudStack development has moved to the ASF - see http://cloudstack.apache.org/",
+            "stargazers": {
+              "totalCount": 277
+            }
+          }
+        }
+      ],
+      "pageInfo": {
+        "endCursor": "MjQw",
+        "hasNextPage": true,
+        "hasPreviousPage": true
+      }
+    }
+  }
+},
+{
+  "data": {
+    "search": {
+      "edges": [
+        {
+          "node": {
+            "owner": {
+              "login": "android"
+            },
+            "name": "platform_packages_apps_settings",
+            "description": null,
+            "stargazers": {
+              "totalCount": 277
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "fixteam"
+            },
+            "name": "fixflow",
+            "description": "做中国最好的开源业务流程引擎【QQ群: 152654373】",
+            "stargazers": {
+              "totalCount": 276
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "alkacon"
+            },
+            "name": "opencms-core",
+            "description": "The Java open source content management system by Alkacon Software",
+            "stargazers": {
+              "totalCount": 275
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "Maescool"
+            },
+            "name": "Catacomb-Snatch",
+            "description": "Mojang's Humble bundle source",
+            "stargazers": {
+              "totalCount": 272
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "xiaopansky"
+            },
+            "name": "Sketch",
+            "description": "Sketch是Android上一个强大且全面的图片加载器，支持GIF，手势缩放以及分块显示超大图片。Sketch is a powerful and comprehensive image loader on Android, with support for GIF, gesture zooming, block display super large image",
+            "stargazers": {
+              "totalCount": 271
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "apache"
+            },
+            "name": "isis",
+            "description": "Apache Isis™ software is a framework for rapidly developing domain-driven apps in Java. Write your business logic in entities, domain services or view models, and the framework dynamically generates a representation of that domain model as a webapp or as a RESTful API. For prototyping or production. ",
+            "stargazers": {
+              "totalCount": 268
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "Peergos"
+            },
+            "name": "Peergos",
+            "description": "A decentralised, secure file storage, sharing and social network that's surveillance resistant and doesn't expose your friend network.",
+            "stargazers": {
+              "totalCount": 267
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "gridgain"
+            },
+            "name": "gridgain",
+            "description": null,
+            "stargazers": {
+              "totalCount": 267
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "dotCMS"
+            },
+            "name": "core",
+            "description": "Source Code for dotCMS Java Enterprise Content Management System",
+            "stargazers": {
+              "totalCount": 267
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "apache"
+            },
+            "name": "tinkerpop",
+            "description": "Mirror of Apache TinkerPop",
+            "stargazers": {
+              "totalCount": 266
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "arun-gupta"
+            },
+            "name": "microservices",
+            "description": "Java EE and Microservices",
+            "stargazers": {
+              "totalCount": 263
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "sleuthkit"
+            },
+            "name": "autopsy",
+            "description": "Autopsy® is a digital forensics platform and graphical interface to The Sleuth Kit® and other digital forensics tools. It can be used by law enforcement, military, and corporate examiners to investigate what happened on a computer. You can even use it to recover photos from your camera's memory card. Installers can be found at: http://www.sf.net/projects/autopsy/files/autopsy",
+            "stargazers": {
+              "totalCount": 259
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "jamesagnew"
+            },
+            "name": "hapi-fhir",
+            "description": "HAPI FHIR - Java API for HL7 FHIR Clients and Servers",
+            "stargazers": {
+              "totalCount": 258
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "carrot2"
+            },
+            "name": "carrot2",
+            "description": "Carrot2: Text Clustering Algorithms and Applications",
+            "stargazers": {
+              "totalCount": 255
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "BaseXdb"
+            },
+            "name": "basex",
+            "description": "BaseX Main Repository.",
+            "stargazers": {
+              "totalCount": 254
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "DSpace"
+            },
+            "name": "DSpace",
+            "description": "(Official) The DSpace digital asset management system that powers your Institutional Repository",
+            "stargazers": {
+              "totalCount": 252
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "getrailo"
+            },
+            "name": "railo",
+            "description": "Railo is an Open Source CFML Server",
+            "stargazers": {
+              "totalCount": 250
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "apache"
+            },
+            "name": "jena",
+            "description": "Mirror of Apache Jena",
+            "stargazers": {
+              "totalCount": 250
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "orbeon"
+            },
+            "name": "orbeon-forms",
+            "description": "Orbeon Forms is an open source web forms solution. It includes an XForms engine, the Form Builder web-based form editor, and the Form Runner runtime.",
+            "stargazers": {
+              "totalCount": 249
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "bndtools"
+            },
+            "name": "bnd",
+            "description": "bnd, the swiss army knife for OSGi. A tool to build OSGi bundles.",
+            "stargazers": {
+              "totalCount": 248
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "Hitomis"
+            },
+            "name": "SortRichEditor",
+            "description": "支持拖动排序的富文本编辑器",
+            "stargazers": {
+              "totalCount": 247
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "OpenIotOrg"
+            },
+            "name": "openiot",
+            "description": "The Open Source Project for the Internet of Things",
+            "stargazers": {
+              "totalCount": 245
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "QuickBlox"
+            },
+            "name": "quickblox-android-sdk",
+            "description": "QuickBlox Android SDK includes code snippets with main use cases and framework JAR library.",
+            "stargazers": {
+              "totalCount": 244
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "cping"
+            },
+            "name": "LGame",
+            "description": "This is free 2d game development framework(Java Game Engine), support JavaSE/Android/IOS/WP7/HTML5/PSM/Linux/MAC/Windows and Default support Ripple protocol",
+            "stargazers": {
+              "totalCount": 243
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "apavlo"
+            },
+            "name": "h-store",
+            "description": "H-Store Distributed Main Memory OLTP Database System",
+            "stargazers": {
+              "totalCount": 242
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "aptana"
+            },
+            "name": "Pydev",
+            "description": "Aptana Python IDE",
+            "stargazers": {
+              "totalCount": 241
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "eleybourn"
+            },
+            "name": "Book-Catalogue",
+            "description": "A book cataloging tool for Android phones. ",
+            "stargazers": {
+              "totalCount": 240
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "Samsung"
+            },
+            "name": "GearVRf",
+            "description": "The GearVR framework(GearVRf) is an Open Source VR rendering library for application development on VR-supported Android devices. ",
+            "stargazers": {
+              "totalCount": 240
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "OpenGamma"
+            },
+            "name": "OG-Platform",
+            "description": "Strata is the new open source analytics and market risk library from OpenGamma",
+            "stargazers": {
+              "totalCount": 239
+            }
+          }
+        },
+        {
+          "node": {
+            "owner": {
+              "login": "lintool"
+            },
+            "name": "Cloud9",
+            "description": "Cloud9 is a Hadoop toolkit for working with big data",
+            "stargazers": {
+              "totalCount": 233
+            }
+          }
+        }
+      ],
+      "pageInfo": {
+        "endCursor": "Mjcw",
+        "hasNextPage": true,
+        "hasPreviousPage": true
+      }
+    }
+  }
+}
+]

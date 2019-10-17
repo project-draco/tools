@@ -1,0 +1,26 @@
+{
+  search(type: REPOSITORY, query: "language:java size:>=102400 fork:false", first: 30, after: "") {
+    edges {
+      node {
+        ... on Repository {
+          owner {
+            login
+          }
+          name
+          description
+          stargazers {
+            totalCount
+          }
+          #commitComments {
+          #  totalCount
+          #}
+        }
+      }
+    }
+        pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
+      }
+  }
+}
