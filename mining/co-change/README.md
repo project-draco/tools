@@ -3,8 +3,7 @@ Running
 We have two options:
 - docker
   ```
-  $ docker build -t co-change .
-  $ docker run -it --rm -v <absolute path of git repo>:/repo co-change [<string to ignore>]
+  $ docker run -it --rm -v <absolute path of git repo>:/repo projectdraco/mining-cochange --help
   ```
 - build
   (requires go 1.10 or newer)
