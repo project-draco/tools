@@ -1,0 +1,6 @@
+github.com/derekparker/delve v1.1.0 h1:icd65nMp7s2HiLz6y/6RCVXBdoED3xxYLwX09EMaRCc=
+github.com/derekparker/delve v1.1.0/go.mod h1:pMSZMfp0Nhbm8qdZJkuE/yPGOkLpGXLS1I4poXQpuJU=
+github.com/project-draco/naming v0.0.0-20180730204545-a58b57aa3099 h1:4rs3tDBtjs20vC2SWcs0eLzboLioCsAMUwZS7DFdtT8=
+github.com/project-draco/naming v0.0.0-20180730204545-a58b57aa3099/go.mod h1:PHVLSw75bWAJ/VDTxUbgBB1/P8xX6yYbjGd/2kmLmLk=
+github.com/project-draco/naming v0.0.0-20190222114625-fa4e2904ff93 h1:tDq3uds0oxcmGuRsC88ppCVRaTrh1mJIzXCIF9/3Mmo=
+github.com/project-draco/naming v0.0.0-20190222114625-fa4e2904ff93/go.mod h1:PHVLSw75bWAJ/VDTxUbgBB1/P8xX6yYbjGd/2kmLmLk=
