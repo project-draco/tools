@@ -249,15 +249,22 @@ func computeMetrics(
 		s := bufio.NewScanner(srf)
 		for s.Scan() {
 			arr := strings.Split(s.Text(), ";")
-			qn := qualifiedName(arr[0])
+			ent := entity(arr[0])
 			//TODO: the code bellow checks if the supplemental refactoring will not result in
 			// an improvement because another dependency remains after move. We must check if
 			// this code is necessary
-			bestCandidate, _ := findBestCandidate(nil, qn.queryString(), qn.file(),
-				[]string{arr[1]}, sdfinder, ccdfinder, nil)
+			bestCandidate, _ := findBestCandidate(
+				nil,
+				ent.queryString(),
+				ent.filename(),
+				[]string{arr[1]},
+				sdfinder,
+				ccdfinder,
+				nil,
+			)
 			if bestCandidate != "" {
-				baselineReassignments[qn.queryString()] = bestCandidate
-				joinReassignments[qn.queryString()] = bestCandidate
+				baselineReassignments[ent.queryString()] = bestCandidate
+				joinReassignments[ent.queryString()] = bestCandidate
 			}
 		}
 		check(s.Err(), "could not read supplemental refactorings file")

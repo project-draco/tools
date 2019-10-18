@@ -6,7 +6,7 @@ import (
 	"regexp"
 	"strings"
 
-	"project-draco.io/naming"
+	"github.com/project-draco/naming"
 )
 
 type finder struct {
@@ -21,8 +21,6 @@ type dependencies struct {
 }
 
 type entity string
-
-type qualifiedName string
 
 var classNameRegexp *regexp.Regexp
 
@@ -232,43 +230,6 @@ func (e entity) parameters() []string {
 		return []string{}
 	}
 	return strings.Split(qs, ",")
-}
-
-func (qn qualifiedName) queryString() string {
-	filename := qn.file()
-	var kind, lastWord string
-	indexOfParenthesis := strings.Index(string(qn), "(")
-	if indexOfParenthesis != -1 {
-		kind = "/[MT]/"
-		lastWord = lastSubstring(string(qn)[:indexOfParenthesis], ".")
-		parameters := string(qn)[indexOfParenthesis+1 : len(string(qn))-1]
-		parameters = naming.RemoveGenerics(parameters)
-		arr := strings.Split(parameters, ",")
-		for i := range arr {
-			arr[i] = lastSubstring(arr[i], ".")
-		}
-		lastWord += "(" + strings.Join(arr, ",") + ")"
-	} else {
-		kind = "/[FE]/"
-		arr := strings.Split(string(qn), ".")
-		lastWord = arr[len(arr)-1]
-	}
-	return "_" + filename + ".java/[CN]/" + filename + kind + lastWord
-}
-
-func (qn qualifiedName) file() string {
-	var arr []string
-	if strings.Contains(string(qn), "(") {
-		arr = strings.Split(string(qn)[:strings.Index(string(qn), "(")], ".")
-	} else {
-		arr = strings.Split(string(qn), ".")
-	}
-	firstCharOfLastWord := arr[len(arr)-1][0:1]
-	isClass := strings.ToUpper(firstCharOfLastWord) == firstCharOfLastWord
-	if isClass {
-		return arr[len(arr)-1]
-	}
-	return arr[len(arr)-2]
 }
 
 func lastSubstring(s, sep string) string {
