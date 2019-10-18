@@ -2,6 +2,8 @@ package main
 
 import (
 	"io"
+
+	"github.com/project-draco/pkg/entity"
 )
 
 type graph struct {
@@ -20,18 +22,18 @@ func newGraph(reassignments map[string]string, readers ...io.Reader) (*graph, er
 				continue
 			}
 			for _, e := range []string{d.From[0], d.To} {
-				if _, ok := g.index[entity(e).filename()]; !ok {
-					g.index[entity(e).filename()] = len(g.successors)
+				if _, ok := g.index[entity.Entity(e).Filename()]; !ok {
+					g.index[entity.Entity(e).Filename()] = len(g.successors)
 					g.successors = append(g.successors, nil)
 					g.weigths = append(g.weigths, nil)
 				}
 			}
-			source := entity(d.From[0]).filename()
-			destination := entity(d.To).filename()
-			if fn, ok := reassignments[entity(d.From[0]).queryString()]; ok {
+			source := entity.Entity(d.From[0]).Filename()
+			destination := entity.Entity(d.To).Filename()
+			if fn, ok := reassignments[entity.Entity(d.From[0]).QueryString()]; ok {
 				source = fn
 			}
-			if fn, ok := reassignments[entity(d.To).queryString()]; ok {
+			if fn, ok := reassignments[entity.Entity(d.To).QueryString()]; ok {
 				destination = fn
 			}
 			if source == destination {

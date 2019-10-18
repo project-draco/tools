@@ -11,6 +11,7 @@ import (
 	"strings"
 
 	"github.com/awalterschulze/gographviz"
+	"github.com/project-draco/pkg/entity"
 )
 
 var before = map[string]float64{
@@ -166,7 +167,7 @@ func doAnalysis(
 	if clusteredgraph == nil {
 		smells, err = findEvolutionarySmellsUsingDependencies(
 			f1, f2, sdfinder, ccdfinder,
-			func(e entity, fromfilename, tofilename string, ignore []string) bool {
+			func(e entity.Entity, fromfilename, tofilename string, ignore []string) bool {
 				// relaxes constraint of "evolutionary smell",
 				// by allowing method to depend on current class if
 				// static dependencies between the source and
@@ -237,8 +238,8 @@ func computeMetrics(
 	joinReassignments := map[string]string{}
 	for _, s := range smells {
 		if s.target != "" {
-			evolutionaryReassignments[entity(s.entity).queryString()] = s.target
-			joinReassignments[entity(s.entity).queryString()] = s.target
+			evolutionaryReassignments[entity.Entity(s.entity).QueryString()] = s.target
+			joinReassignments[entity.Entity(s.entity).QueryString()] = s.target
 		}
 	}
 	reassignments = append(reassignments, evolutionaryReassignments)
@@ -249,22 +250,22 @@ func computeMetrics(
 		s := bufio.NewScanner(srf)
 		for s.Scan() {
 			arr := strings.Split(s.Text(), ";")
-			ent := entity(arr[0])
+			ent := entity.Entity(arr[0])
 			//TODO: the code bellow checks if the supplemental refactoring will not result in
 			// an improvement because another dependency remains after move. We must check if
 			// this code is necessary
 			bestCandidate, _ := findBestCandidate(
 				nil,
-				ent.queryString(),
-				ent.filename(),
+				ent.QueryString(),
+				ent.Filename(),
 				[]string{arr[1]},
 				sdfinder,
 				ccdfinder,
 				nil,
 			)
 			if bestCandidate != "" {
-				baselineReassignments[ent.queryString()] = bestCandidate
-				joinReassignments[ent.queryString()] = bestCandidate
+				baselineReassignments[ent.QueryString()] = bestCandidate
+				joinReassignments[ent.QueryString()] = bestCandidate
 			}
 		}
 		check(s.Err(), "could not read supplemental refactorings file")
@@ -346,19 +347,19 @@ func density(clusteredgraph *gographviz.Graph, ccdfinder *finder) float64 {
 		clusterEntities := map[string]string{}
 		for _, v := range clusteredgraph.Relations.SortedChildren(clustername) {
 			nv := strings.Trim(v, "\"")
-			clusterEntities[entity(nv).queryString()] = nv
+			clusterEntities[entity.Entity(nv).QueryString()] = nv
 		}
 		if len(clusterEntities) <= 1 {
 			continue
 		}
 		count := 0
 		for _, v := range clusterEntities {
-			deps := ccdfinder.dependenciesOf(entity(v))
+			deps := ccdfinder.dependenciesOf(entity.Entity(v))
 			if deps == nil {
 				continue
 			}
 			for _, d := range deps.outcome {
-				if _, ok := clusterEntities[entity(d).queryString()]; ok {
+				if _, ok := clusterEntities[entity.Entity(d).QueryString()]; ok {
 					count++
 				}
 			}

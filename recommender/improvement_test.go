@@ -4,6 +4,8 @@ import (
 	"math"
 	"strings"
 	"testing"
+
+	"github.com/project-draco/pkg/entity"
 )
 
 func TestImprovements(t *testing.T) {
@@ -19,7 +21,7 @@ func TestImprovements(t *testing.T) {
 			p_C3.java/[CN]/C3/[MT]/m3(int) p_C4.java/[CN]/C4/[MT]/m4(int)
 			p_C.java/[CN]/C/[MT]/m3(int) p_C.java/[CN]/C/[MT]/m4(int)
 			`,
-			[]map[string]string{{entity("p_C1.java/[CN]/C1/[MT]/m1(int)").queryString(): "C2"}},
+			[]map[string]string{{entity.Entity("p_C1.java/[CN]/C1/[MT]/m1(int)").QueryString(): "C2"}},
 			`
 			p_C1.java/[CN]/	p_C.java/[CN]/
 			p_C2.java/[CN]/	p_C.java/[CN]/
@@ -33,7 +35,7 @@ func TestImprovements(t *testing.T) {
 			p_C1.java/[CN]/C1/[MT]/m1() p_C2.java/[CN]/C2/[MT]/m2()
 			p_C3.java/[CN]/C3/[MT]/m3() p_C1.java/[CN]/C1/[MT]/m1()
 			`,
-			[]map[string]string{{entity("p_C1.java/[CN]/C1/[MT]/m1()").queryString(): "C2"}},
+			[]map[string]string{{entity.Entity("p_C1.java/[CN]/C1/[MT]/m1()").QueryString(): "C2"}},
 			`
 			p_C1.java/[CN]/ p_C.java/[CN]/
 			`,
@@ -47,7 +49,7 @@ func TestImprovements(t *testing.T) {
 			p_C4.java/[CN]/C4/[MT]/m4() p_C1.java/[CN]/C1/[MT]/m1()
 			p_C4.java/[CN]/C4/[MT]/m4() p_C1.java/[CN]/C1/[MT]/m11()
 			`,
-			[]map[string]string{{entity("p_C1.java/[CN]/C1/[MT]/m1()").queryString(): "C2"}},
+			[]map[string]string{{entity.Entity("p_C1.java/[CN]/C1/[MT]/m1()").QueryString(): "C2"}},
 			`
 			p_C1.java/[CN]/ p_C.java/[CN]/
 			`,

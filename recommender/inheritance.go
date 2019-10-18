@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"io"
 	"strings"
+
+	"github.com/project-draco/pkg/entity"
 )
 
 type inheritance struct {
@@ -38,7 +40,7 @@ func newInheritance(r io.Reader) (*inheritance, error) {
 		subidx := result.index[arr[0]]
 		superidx := result.index[arr[1]]
 		result.superclasses[subidx] = append(result.superclasses[subidx], superidx)
-		result.sindex[entity(arr[1]).filename()] = true
+		result.sindex[entity.Entity(arr[1]).Filename()] = true
 	}
 	if s.Err() != nil {
 		return nil, s.Err()
@@ -102,7 +104,7 @@ func (inh *inheritance) InboundList() [][]int {
 }
 
 func (inh *inheritance) File(i int) string {
-	return entity(inh.rindex[i]).filename()
+	return entity.Entity(inh.rindex[i]).Filename()
 }
 
 func (inh *inheritance) IsSuperclass(file string) bool {

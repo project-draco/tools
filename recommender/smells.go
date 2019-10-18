@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"github.com/awalterschulze/gographviz"
+	"github.com/project-draco/pkg/entity"
 )
 
 type smell struct {
@@ -27,7 +28,7 @@ func findEvolutionarySmellsUsingClusters(
 	for clustername := range clusteredgraph.SubGraphs.SubGraphs {
 		clusterEntitiesByFile := map[string][]string{}
 		for _, v := range clusteredgraph.Relations.SortedChildren(clustername) {
-			filename := entity(v).filename()
+			filename := entity.Entity(v).Filename()
 			clusterEntitiesByFile[filename] =
 				append(clusterEntitiesByFile[filename], strings.Trim(v, "\""))
 		}
@@ -42,7 +43,7 @@ func findEvolutionarySmellsUsingClusters(
 				// discard entities without static dependencies to attempt to avoid dead code
 				// discard entity that depends on another entity inside the same class
 				if !haveAtLeastOneStaticDependencyButNoneWithinTheSameFileOrTheSuperclass(
-					sdfinder, entity(e), filename, inh, []string{},
+					sdfinder, entity.Entity(e), filename, inh, []string{},
 				) {
 					continue
 				}
@@ -61,7 +62,7 @@ func findEvolutionarySmellsUsingClusters(
 func findEvolutionarySmellsUsingDependencies(
 	sdReader, ccdReader io.ReadSeeker,
 	sdfinder, ccdfinder *finder,
-	precondition func(e entity, fromfilename, tofilename string, ignore []string) bool,
+	precondition func(e entity.Entity, fromfilename, tofilename string, ignore []string) bool,
 	inh *inheritance,
 	searchCandidates bool,
 	minimumSupportCount int,
@@ -77,17 +78,17 @@ next:
 			continue
 		}
 		for _, from := range d.From {
-			if entity(from).filename() == entity(d.To).filename() {
+			if entity.Entity(from).Filename() == entity.Entity(d.To).Filename() {
 				continue next
 			}
-			if inh.IsSuperclass(entity(from).filename()) {
+			if inh.IsSuperclass(entity.Entity(from).Filename()) {
 				continue next
 			}
 			if precondition != nil &&
 				!precondition(
-					entity(from),
-					entity(from).filename(),
-					entity(d.To).filename(),
+					entity.Entity(from),
+					entity.Entity(from).Filename(),
+					entity.Entity(d.To).Filename(),
 					d.From,
 				) {
 				continue next
@@ -96,7 +97,7 @@ next:
 		k := strings.Join(d.From, "\t")
 		entitiesWithSmell[k] = append(
 			entitiesWithSmell[k],
-			entity(d.To).filename(),
+			entity.Entity(d.To).Filename(),
 		)
 	}
 	if s.Err() != nil {
@@ -104,8 +105,16 @@ next:
 	}
 	smells := make([]smell, 0, len(entitiesWithSmell))
 	for e, files := range entitiesWithSmell {
-		smells = addSmell(smells, e, sdReader, entity(e).filename(), files,
-			sdfinder, ccdfinder, searchCandidates)
+		smells = addSmell(
+			smells,
+			e,
+			sdReader,
+			entity.Entity(e).Filename(),
+			files,
+			sdfinder,
+			ccdfinder,
+			searchCandidates,
+		)
 	}
 
 	return smells, nil
@@ -113,7 +122,7 @@ next:
 
 func haveAtLeastOneStaticDependencyButNoneWithinTheSameFileOrTheSuperclass(
 	f *finder,
-	e entity,
+	e entity.Entity,
 	filename string,
 	inh *inheritance,
 	ignore []string,
@@ -137,10 +146,10 @@ next:
 				continue next
 			}
 		}
-		if entity(dependency).filename() == filename {
+		if entity.Entity(dependency).Filename() == filename {
 			return false
 		}
-		if inh.IsSuperclass(entity(dependency).filename()) {
+		if inh.IsSuperclass(entity.Entity(dependency).Filename()) {
 			return false
 		}
 	}
@@ -169,7 +178,7 @@ func addSmell(
 	smell := smell{entity: strings.TrimSpace(e), candidates: cs}
 	if searchCandidates {
 		bestCandidate, maxDependenciesToBeRemoved := findBestCandidate(
-			sdReader, entity(e).queryString(), filename, ffnn,
+			sdReader, entity.Entity(e).QueryString(), filename, ffnn,
 			sdfinder, ccdfinder, &smell)
 		if bestCandidate != "" && maxDependenciesToBeRemoved >= 0 {
 			smell.target = bestCandidate
@@ -210,8 +219,8 @@ func findBestCandidate(
 		foundAnotherDependencyNotInvolvingCurrentEntity := false
 		dependenciesInvolvingCurrentEntity := 0
 		for _, d := range dbf {
-			if entity(d[0]).queryString() != querystring &&
-				entity(d[1]).queryString() != querystring {
+			if entity.Entity(d[0]).QueryString() != querystring &&
+				entity.Entity(d[1]).QueryString() != querystring {
 				//foundAnotherDependencyNotInvolvingCurrentEntity = true
 				//break
 			} else {

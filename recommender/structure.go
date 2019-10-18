@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"io"
+
+	"github.com/project-draco/pkg/entity"
 )
 
 type structure struct {
@@ -14,7 +16,7 @@ type structure struct {
 type method struct {
 	Name       string
 	Parameters []string
-	entity     entity
+	entity     entity.Entity
 }
 
 func newStructure(reasssignments map[string]string, r io.Reader) (*structure, error) {
@@ -26,17 +28,25 @@ func newStructure(reasssignments map[string]string, r io.Reader) (*structure, er
 			continue
 		}
 		for _, e := range []string{d.From[0], d.To} {
-			fn := entity(e).filename()
-			if rfn, ok := reasssignments[entity(e).queryString()]; ok {
+			fn := entity.Entity(e).Filename()
+			if rfn, ok := reasssignments[entity.Entity(e).QueryString()]; ok {
 				fn = rfn
 			}
 			lf, lm := len(result.fields), len(result.methods)
-			params := entity(e).parameters()
+			params := entity.Entity(e).Parameters()
 			if params == nil {
-				result.fields[fn] = append(result.fields[fn], entity(e).name())
+				result.fields[fn] = append(
+					result.fields[fn],
+					entity.Entity(e).Name(),
+				)
 			} else {
-				result.methods[fn] = append(result.methods[fn],
-					&method{entity(e).name(), entity(e).parameters(), entity(e)})
+				result.methods[fn] = append(
+					result.methods[fn],
+					&method{
+						entity.Entity(e).Name(),
+						entity.Entity(e).Parameters(),
+						entity.Entity(e),
+					})
 			}
 			if len(result.fields) > lf || len(result.methods) > lm {
 				result.files = append(result.files, fn)
@@ -68,7 +78,7 @@ func (s *structure) PublicMethodsCount(file string, f *finder) int {
 	for _, m := range s.Methods(file) {
 		dd := f.dependenciesOf(m.entity)
 		for _, d := range dd.income {
-			if entity(d).filename() != m.entity.filename() {
+			if entity.Entity(d).Filename() != m.entity.Filename() {
 				result++
 				break
 			}

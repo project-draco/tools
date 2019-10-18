@@ -2,3 +2,7 @@ github.com/awalterschulze/gographviz v0.0.0-20181013152038-b2885df04310 h1:t+qxR
 github.com/awalterschulze/gographviz v0.0.0-20181013152038-b2885df04310/go.mod h1:GEV5wmg4YquNw7v1kkyoX9etIk8yVmXj+AkDHuuETHs=
 github.com/project-draco/naming v0.0.0-20190222114625-fa4e2904ff93 h1:tDq3uds0oxcmGuRsC88ppCVRaTrh1mJIzXCIF9/3Mmo=
 github.com/project-draco/naming v0.0.0-20190222114625-fa4e2904ff93/go.mod h1:PHVLSw75bWAJ/VDTxUbgBB1/P8xX6yYbjGd/2kmLmLk=
+github.com/project-draco/pkg v0.0.0-20191018193929-a935478160e3 h1:B1EZSueC9RRJQPY7+7jJyezdRatkSN3jls3avptX1eg=
+github.com/project-draco/pkg v0.0.0-20191018193929-a935478160e3/go.mod h1:CspwNci7AP2pHT1tbC73T/6wTY8SM5O2PD5F7Il59zo=
+github.com/project-draco/pkg v0.0.0-20191018194621-99acbc920628 h1:80kYNxIsGXQSoKXmXeXKZOJ5X9/p2dAJh2iXFk/3oMU=
+github.com/project-draco/pkg v0.0.0-20191018194621-99acbc920628/go.mod h1:CspwNci7AP2pHT1tbC73T/6wTY8SM5O2PD5F7Il59zo=
