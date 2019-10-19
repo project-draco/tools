@@ -8,9 +8,9 @@ import (
 	"path"
 	"strings"
 
-	"github.com/project-draco/naming"
+	parser "github.com/project-draco/pkg/refminer-parser"
 
-	parser "project-draco.io/refminer-parser"
+	"github.com/project-draco/naming"
 )
 
 func main() {
