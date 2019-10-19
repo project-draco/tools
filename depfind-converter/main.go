@@ -8,7 +8,7 @@ import (
 	"os"
 	"strings"
 
-	"project-draco.io/naming"
+	"github.com/project-draco/naming"
 )
 
 type root struct {
