@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 
+	scanner "github.com/project-draco/pkg/dependency-scanner"
 	"github.com/project-draco/pkg/entity"
 )
 
@@ -21,7 +22,7 @@ type method struct {
 
 func newStructure(reasssignments map[string]string, r io.Reader) (*structure, error) {
 	result := &structure{nil, map[string][]*method{}, map[string][]string{}}
-	s := newDependencyScanner(r)
+	s := scanner.NewDependencyScanner(r)
 	for s.Scan() {
 		d := s.Dependency()
 		if len(d.From) != 1 {

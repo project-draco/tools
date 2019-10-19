@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"github.com/awalterschulze/gographviz"
+	scanner "github.com/project-draco/pkg/dependency-scanner"
 	"github.com/project-draco/pkg/entity"
 )
 
@@ -70,7 +71,7 @@ func findEvolutionarySmellsUsingDependencies(
 	// entitiesWithSmell maps entities to filenames it relates to
 	entitiesWithSmell := map[string][]string{}
 	ccdReader.Seek(0, 0)
-	s := newDependencyScanner(ccdReader)
+	s := scanner.NewDependencyScanner(ccdReader)
 next:
 	for s.Scan() {
 		d := s.Dependency()

@@ -3,6 +3,7 @@ package main
 import (
 	"io"
 
+	scanner "github.com/project-draco/pkg/dependency-scanner"
 	"github.com/project-draco/pkg/entity"
 )
 
@@ -15,7 +16,7 @@ type graph struct {
 func newGraph(reassignments map[string]string, readers ...io.Reader) (*graph, error) {
 	g := &graph{index: make(map[string]int)}
 	for _, r := range readers {
-		s := newDependencyScanner(r)
+		s := scanner.NewDependencyScanner(r)
 		for s.Scan() {
 			d := s.Dependency()
 			if len(d.From) != 1 {

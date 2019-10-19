@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/project-draco/pkg/entity"
+	"github.com/project-draco/pkg/dependency-scanner"
 )
 
 type finder struct {
@@ -26,7 +27,7 @@ func newFinder(dr, er io.Reader) (*finder, error) {
 		make(map[[2]string]struct{}),
 		"",
 	}
-	s := newDependencyScanner(dr)
+	s := scanner.NewDependencyScanner(dr)
 	for s.Scan() {
 		d := s.Dependency()
 		if len(d.From) != 1 {
