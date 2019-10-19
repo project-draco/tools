@@ -52,7 +52,7 @@ func TestFindEvolutionarySmells(t *testing.T) {
 	ccfinder, err = newFinder(ccdreader, nil)
 	checkT(t, err)
 	smells, err = findEvolutionarySmellsUsingDependencies(
-		sdreader, ccdreader, sdfinder, ccfinder, nil, nil, false, 0,
+		sdreader, ccdreader, sdfinder, ccfinder, nil, nil, false, 0, 0,
 	)
 	checkT(t, err)
 	if len(smells) != 1 {

@@ -67,6 +67,7 @@ func findEvolutionarySmellsUsingDependencies(
 	inh *inheritance,
 	searchCandidates bool,
 	minimumSupportCount int,
+	minimumConfidence float64,
 ) ([]smell, error) {
 	// entitiesWithSmell maps entities to filenames it relates to
 	entitiesWithSmell := map[string][]string{}
@@ -76,6 +77,9 @@ next:
 	for s.Scan() {
 		d := s.Dependency()
 		if d.SupportCount < minimumSupportCount {
+			continue
+		}
+		if d.Confidence < minimumConfidence {
 			continue
 		}
 		for _, from := range d.From {

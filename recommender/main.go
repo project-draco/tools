@@ -27,6 +27,9 @@ func main() {
 	minimumSupportCount := flag.Int(
 		"minimum-support-count", 2, "minimum support count",
 	)
+	minimumConfidence := flag.Float64(
+		"minimum-confidence", 0.5, "minimum confidence",
+	)
 	allowToDependOnCurrentClass := flag.Bool(
 		"allow-to-depend-on-current-class",
 		false,
@@ -70,6 +73,7 @@ func main() {
 			computeMetrics,
 			*supplementalRefactorings,
 			*minimumSupportCount,
+			*minimumConfidence,
 			*allowToDependOnCurrentClass,
 		)
 		if *output == "metapost" {
@@ -129,6 +133,7 @@ func doAnalysis(
 	metric bool,
 	supplementalRefactorings string,
 	minimumSupportCount int,
+	minimumConfidence float64,
 	allowToDependOnCurrentClass bool,
 ) ([]smell, []map[string]float64, map[string]float64) {
 	var clusteredgraph *gographviz.Graph
@@ -184,6 +189,7 @@ func doAnalysis(
 			},
 			inh, searchCandidates,
 			minimumSupportCount,
+			minimumConfidence,
 		)
 	} else {
 		smells, err = findEvolutionarySmellsUsingClusters(
