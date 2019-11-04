@@ -14,19 +14,37 @@ import (
 )
 
 func main() {
+	var (
+		minimumSupportCount [2]int
+		minimumConfidence   [2]float64
+	)
+	name := flag.String("name", "", "name")
 	granularity := flag.String("granularity", "fine", "fine|coarse")
-	minimumSupportCount := flag.Int(
-		"minimum-support-count", 2, "minimum support count",
-	)
-	minimumConfidence := flag.Float64(
-		"minimum-confidence", 0.5, "minimum confidence",
-	)
+	for i := 0; i < 2; i++ {
+		flag.IntVar(
+			&minimumSupportCount[i],
+			fmt.Sprintf("minimum-support-count-%v", i),
+			2,
+			fmt.Sprintf("minimum support count for the file %v", i+1),
+		)
+		flag.Float64Var(
+			&minimumConfidence[i],
+			fmt.Sprintf("minimum-confidence-%v", i),
+			0.5,
+			fmt.Sprintf("minimum confidence for the file %v", i+1),
+		)
+	}
+	object := flag.String("object", "dependency", "dependency|entity")
 	flag.Parse()
 	if flag.NArg() < 2 {
 		fmt.Printf(
 			"usage: %v [options] <file1> <file2>\n", path.Base(os.Args[0]),
 		)
 		os.Exit(1)
+	}
+
+	if *name != "" {
+		*name += ","
 	}
 
 	keyfn := func(e entity.Entity) string {
@@ -38,10 +56,20 @@ func main() {
 		}
 	}
 
+	addfn := func(from, to string, result map[[2]string]bool) {
+		result[[2]string{from, to}] = true
+	}
+	if *object == "entity" {
+		addfn = func(from, to string, result map[[2]string]bool) {
+			result[[2]string{from, from}] = true
+			result[[2]string{to, to}] = true
+		}
+	}
+
 	var (
-		readers      [2]io.Reader
-		dependencies [2]map[[2]string]bool
-		err          error
+		readers [2]io.Reader
+		objects [2]map[[2]string]bool
+		err     error
 	)
 	for i := range readers {
 		readers[i], err = os.Open(flag.Arg(i))
@@ -49,42 +77,40 @@ func main() {
 			log.Fatalf("could not open dependency file: %v", err)
 			os.Exit(1)
 		}
-		minSC := 0
-		minConf := 0.0
-		if i == 0 {
-			minSC = *minimumSupportCount
-			minConf = *minimumConfidence
-		}
-		dependencies[i], err = createMapFromDependencyFile(
+		objects[i], err = createMapFromDependencyFile(
 			readers[i],
 			keyfn,
-			minSC,
-			minConf,
+			addfn,
+			minimumSupportCount[i],
+			minimumConfidence[i],
 		)
 		if err != nil {
 			log.Fatal(err)
 			os.Exit(1)
 		}
 	}
-	if len(dependencies[0]) == 0 || len(dependencies[1]) == 0 {
+	if len(objects[0]) == 0 || len(objects[1]) == 0 {
 		log.Fatalf(
 			"empty dependencies file: %v, %v",
-			len(dependencies[0]),
-			len(dependencies[1]),
+			len(objects[0]),
+			len(objects[1]),
 		)
 	}
-	onlyOnFirst, onlyOnSecond, onBoth := diff(dependencies)
-	fmt.Println(
-		float64(len(onlyOnFirst))/float64(len(dependencies[0])),
-		float64(len(onBoth))/float64(len(dependencies[0])),
-		float64(len(onlyOnSecond))/float64(len(dependencies[1])),
-		float64(len(onBoth))/float64(len(dependencies[1])),
+	onlyOnFirst, onlyOnSecond, onBoth := diff(objects)
+	fmt.Printf(
+		"%v%v,%v,%v,%v\n",
+		*name,
+		float64(len(onlyOnFirst))/float64(len(objects[0])),
+		float64(len(onBoth))/float64(len(objects[0])),
+		float64(len(onlyOnSecond))/float64(len(objects[1])),
+		float64(len(onBoth))/float64(len(objects[1])),
 	)
 }
 
 func createMapFromDependencyFile(
 	r io.Reader,
 	keyfn func(entity.Entity) string,
+	addfn func(from, to string, result map[[2]string]bool),
 	minimumSupportCount int,
 	minimumConfidence float64,
 ) (
@@ -101,7 +127,7 @@ func createMapFromDependencyFile(
 		d := scan.Dependency()
 		from := entity.Entity(d.From[0])
 		to := entity.Entity(d.To)
-		result[[2]string{keyfn(from), keyfn(to)}] = true
+		addfn(keyfn(from), keyfn(to), result)
 	}
 	if scan.Err() != nil {
 		return nil, fmt.Errorf(
@@ -119,14 +145,16 @@ func diff(
 	onBoth [][2]string,
 ) {
 	for dep := range dependencies[0] {
-		if dependencies[1][dep] {
+		inv := [2]string{dep[1], dep[0]}
+		if dependencies[1][dep] || dependencies[1][inv] {
 			onBoth = append(onBoth, dep)
 		} else {
 			onlyOnFirst = append(onlyOnFirst, dep)
 		}
 	}
 	for dep := range dependencies[1] {
-		if !dependencies[0][dep] {
+		inv := [2]string{dep[1], dep[0]}
+		if !dependencies[0][dep] && !dependencies[0][inv] {
 			onlyOnSecond = append(onlyOnSecond, dep)
 		}
 	}
