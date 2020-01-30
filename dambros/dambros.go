@@ -8,11 +8,9 @@ import (
 	"path"
 
 	scanner "github.com/project-draco/pkg/dependency-scanner"
-	"github.com/project-draco/pkg/entity"
 )
 
 func main() {
-	granularity := flag.String("granularity", "fine", "fine|coarse")
 	minimumSupportCount := flag.Int(
 		"min-support-count", 2, "minimum support count",
 	)
@@ -25,14 +23,6 @@ func main() {
 			"usage: %v [options] <file>\n", path.Base(os.Args[0]),
 		)
 		os.Exit(1)
-	}
-	keyfn := func(e entity.Entity) string {
-		return e.QueryString()
-	}
-	if *granularity == "coarse" {
-		keyfn = func(e entity.Entity) string {
-			return e.Filename()
-		}
 	}
 
 	reader, err := os.Open(flag.Arg(0))
@@ -49,8 +39,8 @@ func main() {
 	)
 	for scan.Scan() {
 		d := scan.Dependency()
-		from := entity.Entity(d.From[0])
-		result[keyfn(from)] = append(result[keyfn(from)], d.SupportCount)
+		from := d.From[0]
+		result[from] = append(result[from], d.SupportCount)
 	}
 	if scan.Err() != nil {
 		log.Fatalf("could not read dependency file: %v", scan.Err())
