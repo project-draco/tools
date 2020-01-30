@@ -1,3 +1,12 @@
+### Installing
 ```sh
-$ go run dambros.go --help
+$ go get github.com/project-draco/tools/dambros
+```
+### Running
+```sh
+$ dambros [options] <file>
+```
+### Options
+```sh
+$ dambros --help
 ```
