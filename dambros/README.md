@@ -1,3 +1,5 @@
+### About
+Computes metrics from D'Ambros et al. WCRE 2009
 ### Installing
 ```sh
 $ go get github.com/project-draco/tools/dambros
