@@ -12,5 +12,5 @@ The sequence of steps of the DRACO approach are implemented by the following too
   a co-change MDG,
   a static dependencies MDG,
   an inheritance file,
-  and optionaly a co-change clusters DOT file;
+  and optionally a co-change clusters DOT file;
 - **pruning**: filter a co-change MDG based on minimal support count and confidence metrics.
