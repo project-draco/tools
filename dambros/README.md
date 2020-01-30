@@ -6,7 +6,7 @@ $ go get github.com/project-draco/tools/dambros
 ```
 ### Running
 ```sh
-$ dambros [options] <mdg-file>
+$ dambros [options] <co-change-mdg-file>
 ```
 ### Options
 ```sh
