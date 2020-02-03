@@ -43,7 +43,7 @@ var (
 	minCommits                = flag.Int("min-commits", 0, "Min commits count")
 	ignore                    = flag.String("ignore", "", "A string to ignore")
 	output                    = flag.String(
-		"output", "rules", "One of: rules|transactions|count")
+		"output", "rules", "One of: rules|rules-and-commits|transactions|count")
 	granularity = flag.String(
 		"granularity", "fine", "Granularity of consequent. One of: fine|coarse")
 	aggregationLevel   = flag.Int("aggregation-level", 1, "Aggregation level")
@@ -85,6 +85,8 @@ func collect() {
 	conjunctiveFineGrainedRules := rules{}
 	conjunctiveCoarseGrainedRules := rules{}
 	commitsCountByAntecedents := map[string]int{}
+	commitsByFineGrainedRule := map[ruleAsString]set{}
+	commitsByCoarseGrainedRule := map[ruleAsString]set{}
 	adjacencyList := map[string]set{}
 	commitsCount := 0
 	regexpToReplace := regexp.MustCompile(`\/body$|\/parameters$`)
@@ -106,9 +108,13 @@ func collect() {
 			for m := range modified {
 				commitsCountByAntecedents[m]++
 			}
-			if *output == "rules" {
-				fgr, cgr := addRules(fineGrainedRules, coarseGrainedRules,
-					adjacencyList, modified)
+			if *output == "rules" || *output == "rules-and-commits" {
+				fgr, cgr := addRules(
+					fineGrainedRules,
+					coarseGrainedRules,
+					adjacencyList,
+					modified,
+				)
 				if *aggregationLevel > 1 {
 					ch := make(chan ruleWithCount)
 					go aggregate(ch, fgr, rules{}, rules{},
@@ -123,6 +129,12 @@ func collect() {
 						conjunctiveCoarseGrainedRules[rc.r.asString()]++
 					}
 				}
+				for r := range fgr {
+					commitsByFineGrainedRule[r] = commitsByFineGrainedRule[r].add(c)
+				}
+				for r := range cgr {
+					commitsByCoarseGrainedRule[r] = commitsByCoarseGrainedRule[r].add(c)
+				}
 			}
 		}
 		for _, d := range deleted {
@@ -131,13 +143,18 @@ func collect() {
 		deleteRules(fineGrainedRules, deleted)
 		deleteRules(coarseGrainedRules, deleted)
 	}
-	var rr, cr rules
+	var (
+		rr, cr        rules
+		commitsByRule map[ruleAsString]set
+	)
 	if *granularity == "fine" {
 		rr = fineGrainedRules
 		cr = conjunctiveFineGrainedRules
+		commitsByRule = commitsByFineGrainedRule
 	} else {
 		rr = coarseGrainedRules
 		cr = conjunctiveCoarseGrainedRules
+		commitsByRule = commitsByCoarseGrainedRule
 	}
 	var ch chan ruleWithCount
 	if *aggregationLevel > 1 {
@@ -147,7 +164,13 @@ func collect() {
 			*minSupport, *minConfidence, *minSupportCount)
 	}
 	if !*cpuprofile && !*memprofile {
-		printOutput(rr, ch, commitsCountByAntecedents, commitsCount)
+		printOutput(
+			rr,
+			ch,
+			commitsCountByAntecedents,
+			commitsCount,
+			commitsByRule,
+		)
 	} else if ch != nil {
 		// drain the channel
 		for range ch {
@@ -376,24 +399,33 @@ func printOutput(
 	aggrch chan ruleWithCount,
 	commitsCountByAntecedents map[string]int,
 	commitsCount int,
+	commitsByRule map[ruleAsString]set,
 ) {
 	switch *output {
 	case "count":
 		for k, v := range commitsCountByAntecedents {
 			fmt.Fprintf(out, "%v\t%v\n", k, v)
 		}
-	case "rules":
+	case "rules", "rules-and-commits":
 		for key, supportCount := range rules {
 			r := key.asRule()
-			printRule(ruleWithCount{r, supportCount}, commitsCountByAntecedents,
-				commitsCount)
+			printRule(
+				ruleWithCount{r, supportCount},
+				commitsCountByAntecedents,
+				commitsCount,
+				commitsByRule[key],
+			)
 		}
 		if aggrch != nil {
 			for r := range aggrch {
-				printRule(r, commitsCountByAntecedents, commitsCount)
+				printRule(
+					r,
+					commitsCountByAntecedents,
+					commitsCount,
+					commitsByRule[r.r.asString()],
+				)
 			}
 		}
-
 	}
 }
 
@@ -401,6 +433,7 @@ func printRule(
 	rc ruleWithCount,
 	commitsCountByAntecedents map[string]int,
 	commitsCount int,
+	commits set,
 ) {
 	mu.Lock()
 	defer mu.Unlock()
@@ -412,9 +445,21 @@ func printRule(
 		confidence < *minConfidence {
 		return
 	}
-	fmt.Fprintf(out, "%v\t%v\t%v\t%.4f\t%v\t%v\n",
-		antecedents, rc.r.Consequent, rc.c,
-		confidence, commitsCountByAntecedents[antecedents], commitsCount)
+	var commitsAsString string
+	if *output == "rules-and-commits" {
+		commitsAsString = fmt.Sprintf("\t%v", commits)
+	}
+	fmt.Fprintf(
+		out,
+		"%v\t%v\t%v\t%.4f\t%v\t%v%v\n",
+		antecedents,
+		rc.r.Consequent,
+		rc.c,
+		confidence,
+		commitsCountByAntecedents[antecedents],
+		commitsCount,
+		commitsAsString,
+	)
 }
 
 func scanOutput(b []byte) (ch chan string) {
@@ -463,4 +508,12 @@ func (s set) add(str ...string) set {
 		s[each] = struct{}{}
 	}
 	return s
+}
+
+func (s set) String() string {
+	var str []string
+	for each := range s {
+		str = append(str, each)
+	}
+	return strings.Join(str, ",")
 }
