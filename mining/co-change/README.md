@@ -8,6 +8,6 @@ We have two options:
 - install
   (requires go 1.10 or newer)
   ```
-  $ go install github.com/project-draco/tools/mining/co-change
+  $ go get -u github.com/project-draco/tools/mining/co-change
   $ co-change --help
   ```
