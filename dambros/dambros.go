@@ -17,6 +17,7 @@ func main() {
 	minimumConfidence := flag.Float64(
 		"min-confidence", 0.5, "minimum confidence",
 	)
+	project := flag.String("project", "", "project")
 	flag.Parse()
 	if flag.NArg() < 1 {
 		fmt.Printf(
@@ -47,7 +48,13 @@ func main() {
 		os.Exit(1)
 	}
 
-	fmt.Println("entity;nocc;soc")
+	labels := "entity;nocc;soc"
+	projectLabel := ""
+	if *project != "" {
+		labels = "project;" + labels
+		projectLabel = ";" + *project
+	}
+	fmt.Println(labels)
 	for ent, supps := range result {
 		if ent == "" {
 			continue
@@ -57,6 +64,6 @@ func main() {
 		for _, s := range supps {
 			soc += s
 		}
-		fmt.Printf("%v;%v;%v\n", ent, nocc, soc)
+		fmt.Printf("%v%v;%v;%v\n", projectLabel, ent, nocc, soc)
 	}
 }
