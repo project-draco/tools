@@ -52,7 +52,7 @@ func main() {
 	projectLabel := ""
 	if *project != "" {
 		labels = "project;" + labels
-		projectLabel = ";" + *project
+		projectLabel = *project + ";"
 	}
 	fmt.Println(labels)
 	for ent, supps := range result {
