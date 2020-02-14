@@ -32,7 +32,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	var result = make(map[string][][]string)
+	var result = make(map[string][]int)
 	scan := scanner.NewDependencyScannerWithFilter(
 		reader,
 		*minimumSupportCount,
@@ -41,7 +41,7 @@ func main() {
 	for scan.Scan() {
 		d := scan.Dependency()
 		from := d.From[0]
-		result[from] = append(result[from], d.Hashes)
+		result[from] = append(result[from], d.SupportCount)
 	}
 	if scan.Err() != nil {
 		log.Fatalf("could not read dependency file: %v", scan.Err())
@@ -55,19 +55,15 @@ func main() {
 		projectLabel = *project + ";"
 	}
 	fmt.Println(labels)
-	for ent, hashes := range result {
+	for ent, supps := range result {
 		if ent == "" {
 			continue
 		}
-		nocc := len(hashes)
+		nocc := len(supps)
 		soc := 0
-		hashesMap := make(map[string]struct{})
-		for _, hs := range hashes {
-			for _, h := range hs {
-				hashesMap[h] = struct{}{}
-			}
+		for _, s := range supps {
+			soc += s
 		}
-		soc += len(hashesMap)
 		fmt.Printf("%v%v;%v;%v\n", projectLabel, ent, nocc, soc)
 	}
 }
