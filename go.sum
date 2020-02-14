@@ -16,3 +16,5 @@ github.com/project-draco/pkg v0.0.0-20191019224928-c0509a22dfd6 h1:LR175oO4oYJgC
 github.com/project-draco/pkg v0.0.0-20191019224928-c0509a22dfd6/go.mod h1:CspwNci7AP2pHT1tbC73T/6wTY8SM5O2PD5F7Il59zo=
 github.com/project-draco/pkg v0.0.0-20200203145024-2d292ad88923 h1:GU0/07nYgHf8BgzQrax8/ium8WXR0bHm/LXliQ6A6II=
 github.com/project-draco/pkg v0.0.0-20200203145024-2d292ad88923/go.mod h1:CspwNci7AP2pHT1tbC73T/6wTY8SM5O2PD5F7Il59zo=
+github.com/project-draco/pkg v0.0.0-20200214121432-ba5a6bde4339 h1:zLDgz3tT8B5cEbNcPZk/h9u8i6A5T4wUH1MLHQ0ulNE=
+github.com/project-draco/pkg v0.0.0-20200214121432-ba5a6bde4339/go.mod h1:CspwNci7AP2pHT1tbC73T/6wTY8SM5O2PD5F7Il59zo=
