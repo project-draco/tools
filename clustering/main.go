@@ -95,8 +95,8 @@ func main() {
 	ubound := fmt.Sprintf("%b", len(vertices)/2)
 	for i := 0; i < len(vertices); i++ {
 		lengths[i] = lbits
-		bounds[i] = binary.Bound{lbound, ubound}
-		ibounds[i] = integer.Bound{0, len(vertices) / 2}
+		bounds[i] = binary.Bound{Min: lbound, Max: ubound}
+		ibounds[i] = integer.Bound{Min: 0, Max: len(vertices) / 2}
 	}
 	// set crossover probability according to Brian S. Mitchel (2002, p 93)
 	var cp float64
@@ -134,14 +134,13 @@ func main() {
 		c := make([]int64, len(vertices))
 		k := make([]float64, len(vertices))
 		objectiveFunc := func(individual moea.Individual) []float64 {
-			for i, _ := range k {
+			for i := range k {
 				k[i] = 0
 			}
 			for i := 0; i < len(vertices); i++ {
 				α[i] = 0
 				β[i] = 0
 				c[i] = individual.Value(i).(binary.BinaryString).Int().Int64()
-				// c[i] = int64(individual.Value(i).(int))
 				k[c[i]]++
 			}
 			min, max, cc := math.MaxFloat64, 0.0, 0.0
@@ -185,7 +184,7 @@ func main() {
 		if *pmulti {
 			selection = &nsgaii.NsgaIISelection{}
 		} else {
-			selection = &moea.TournamentSelection{10}
+			selection = &moea.TournamentSelection{TournamentSize: 10}
 		}
 		fmt.Fprintln(os.Stderr, "About to create config")
 		return &moea.Config{
@@ -225,7 +224,6 @@ func main() {
 	clusters := map[int64][]string{}
 	for i := 0; i < len(vertices); i++ {
 		c := result.BestIndividual.Value(i).(binary.BinaryString).Int().Int64()
-		// c := int64(result.BestIndividual.Value(i).(int))
 		if _, ok := clusters[c]; !ok {
 			clusters[c] = []string{}
 		}
