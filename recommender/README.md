@@ -1,13 +1,13 @@
 # Draco refactoring recommendation tool
 
 The Draco approach consists in the following steps:
-1. produce a fine-grained change history of the source-code, where each commit refers to methods or
+1. produce a fine-grained change history of the source-code (using this [tool](https://github.com/project-draco/tools/tree/master/g2h)), where each commit refers to methods or
 fields instead of files;
-2. compute co-change dependencies, which results in
+2. compute co-change dependencies (using this [tool](https://github.com/project-draco/tools/tree/master/mining/co-change)), which results in
 a graph where nodes represent methods or fields and edges represent a
 co-change dependency between them (it is used the metrics _support count_ and
 _confidence_ to determine a co-change dependency);
-3. Optionaly compute co-change clusters, using a multi-objective genetic algorithm
+3. Optionaly compute co-change clusters (using this [tool](https://github.com/project-draco/tools/tree/master/clustering)), using a multi-objective genetic algorithm
 (a co-change cluster is defined as a set of source code entities
 that are strongly co-change dependent on each other);
 4. compute _evolutionary smells_, that are identified using one of the following options:
