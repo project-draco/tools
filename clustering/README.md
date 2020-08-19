@@ -1,6 +1,6 @@
 # Draco Clustering Tool (DCT)
 
-DCT reads an Module Dependency Graph (MDG) from standard input and writes a clustered graph in DOT format on standard output.
+DCT reads a Module Dependency Graph (MDG) from standard input and writes a clustered graph in DOT format on standard output.
 
 ## Install
 
