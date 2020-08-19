@@ -2,10 +2,14 @@
 
 DCT reads a Module Dependency Graph (MDG) from standard input and writes a clustered graph in DOT format on standard output.
 
-## Install
+## Pre-compiled releases
+
+https://github.com/project-draco/tools/releases/tag/v1.0
+
+## Install from sources
 
 ```$ go get -u github.com/project-draco/tools/clustering```
 
 ## Running
 
-```$ clustering [--multi] [--repeat=n] < software.mdg > software.dot```
+```$ clustering[.exe|-macos|-linux|-linux-arm] [--multi] [--repeat=n] < software.mdg > software.dot```
