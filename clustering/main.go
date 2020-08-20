@@ -20,7 +20,7 @@ import (
 
 func main() {
 	prepeat := flag.Int("repeat", 0, "Repeat")
-	pmulti := flag.Bool("multi", false, "Multi-objective")
+	pmono := flag.Bool("mono", false, "Mono-objective")
 	cpuprofile := flag.String("cpuprofile", "", "write cpu profile to file")
 	memprofile := flag.String("memprofile", "", "write mem profile to file")
 	flag.Parse()
@@ -181,10 +181,10 @@ func main() {
 		bp := binary.NewRandomBinaryPopulation(ps, lengths, nil /*bounds*/, rng)
 		// _ /*ip :*/ = integer.NewRandomIntegerPopulation(ps, len(vertices), ibounds, rng)
 		var selection moea.SelectionOperator
-		if *pmulti {
-			selection = &nsgaii.NsgaIISelection{}
-		} else {
+		if *pmono {
 			selection = &moea.TournamentSelection{TournamentSize: 10}
+		} else {
+			selection = &nsgaii.NsgaIISelection{}
 		}
 		fmt.Fprintln(os.Stderr, "About to create config")
 		return &moea.Config{

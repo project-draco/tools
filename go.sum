@@ -1,5 +1,7 @@
 github.com/awalterschulze/gographviz v0.0.0-20190522210029-fa59802746ab h1:+cdNqtOJWjvepyhxy23G7z7vmpYCoC65AP0nqi1f53s=
 github.com/awalterschulze/gographviz v0.0.0-20190522210029-fa59802746ab/go.mod h1:GEV5wmg4YquNw7v1kkyoX9etIk8yVmXj+AkDHuuETHs=
+github.com/google/go-cmp v0.5.1 h1:JFrFEBb2xKufg6XkJsJr+WbKb4FQlURi5RUcBveYu9k=
+github.com/google/go-cmp v0.5.1/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/gNBxE=
 github.com/project-draco/moea v0.0.0-20190422135043-9edfa7276ea6 h1:QsTI5ju/r/u1uh+ojpKtdjVtgyQyCUm885nw5CxTcqY=
 github.com/project-draco/moea v0.0.0-20190422135043-9edfa7276ea6/go.mod h1:Jgu8EhC5IOLIwwi/sa7jh1UPmK0+X2Sd32/dOBxfc8g=
 github.com/project-draco/naming v0.0.0-20190222114625-fa4e2904ff93 h1:tDq3uds0oxcmGuRsC88ppCVRaTrh1mJIzXCIF9/3Mmo=
@@ -16,3 +18,5 @@ github.com/project-draco/pkg v0.0.0-20191019224928-c0509a22dfd6 h1:LR175oO4oYJgC
 github.com/project-draco/pkg v0.0.0-20191019224928-c0509a22dfd6/go.mod h1:CspwNci7AP2pHT1tbC73T/6wTY8SM5O2PD5F7Il59zo=
 github.com/project-draco/pkg v0.0.0-20200203145024-2d292ad88923 h1:GU0/07nYgHf8BgzQrax8/ium8WXR0bHm/LXliQ6A6II=
 github.com/project-draco/pkg v0.0.0-20200203145024-2d292ad88923/go.mod h1:CspwNci7AP2pHT1tbC73T/6wTY8SM5O2PD5F7Il59zo=
+golang.org/x/xerrors v0.0.0-20191204190536-9bdfabe68543 h1:E7g+9GITq07hpfrRu66IVDexMakfv52eLZ2CXBWiKr4=
+golang.org/x/xerrors v0.0.0-20191204190536-9bdfabe68543/go.mod h1:I/5z698sn9Ka8TeJc9MKroUUfqBBauWjQqLJ2OPfmY0=
