@@ -19,8 +19,8 @@ import (
 )
 
 func main() {
-	prepeat := flag.Int("repeat", 0, "Repeat")
-	pmono := flag.Bool("mono", false, "Mono-objective")
+	repeat := flag.Int("repeat", 0, "Repeat")
+	mono := flag.Bool("mono", false, "Mono-objective")
 	cpuprofile := flag.String("cpuprofile", "", "write cpu profile to file")
 	memprofile := flag.String("memprofile", "", "write mem profile to file")
 	flag.Parse()
@@ -181,7 +181,7 @@ func main() {
 		bp := binary.NewRandomBinaryPopulation(ps, lengths, nil /*bounds*/, rng)
 		// _ /*ip :*/ = integer.NewRandomIntegerPopulation(ps, len(vertices), ibounds, rng)
 		var selection moea.SelectionOperator
-		if *pmono {
+		if *mono {
 			selection = &moea.TournamentSelection{TournamentSize: 10}
 		} else {
 			selection = &nsgaii.NsgaIISelection{}
@@ -216,7 +216,7 @@ func main() {
 	fmt.Fprintf(os.Stderr, "Max Generations: %v, Population Size: %v, Individual Size: %v, Variables: %v\n",
 		mg, ps, lbits*ps, len(lengths))
 	start = time.Now()
-	result, err := moea.RunRepeatedly(newConfig, *prepeat)
+	result, err := moea.RunRepeatedly(newConfig, *repeat)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		return
