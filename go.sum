@@ -2,8 +2,13 @@ github.com/awalterschulze/gographviz v0.0.0-20190522210029-fa59802746ab h1:+cdNq
 github.com/awalterschulze/gographviz v0.0.0-20190522210029-fa59802746ab/go.mod h1:GEV5wmg4YquNw7v1kkyoX9etIk8yVmXj+AkDHuuETHs=
 github.com/google/go-cmp v0.5.1 h1:JFrFEBb2xKufg6XkJsJr+WbKb4FQlURi5RUcBveYu9k=
 github.com/google/go-cmp v0.5.1/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/gNBxE=
+github.com/google/go-cmp v0.5.2/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/gNBxE=
 github.com/project-draco/moea v0.0.0-20190422135043-9edfa7276ea6 h1:QsTI5ju/r/u1uh+ojpKtdjVtgyQyCUm885nw5CxTcqY=
 github.com/project-draco/moea v0.0.0-20190422135043-9edfa7276ea6/go.mod h1:Jgu8EhC5IOLIwwi/sa7jh1UPmK0+X2Sd32/dOBxfc8g=
+github.com/project-draco/moea v0.0.0-20201105145408-85e174143434 h1:DPsDwcrBLY42/e0hCGhT2+3BbcTMWpsqxHcWU+a78F0=
+github.com/project-draco/moea v0.0.0-20201105145408-85e174143434/go.mod h1:jgGO4aPhMVssidjWuPd0V478p7sUYnq755LzQQqFZ3s=
+github.com/project-draco/moea v0.0.0-20201105155934-4dcfe782c556 h1:W+ehjTuqAbN7Iqw2tNZfOhOKyqVVT2Y8koy6GJPpx9Q=
+github.com/project-draco/moea v0.0.0-20201105155934-4dcfe782c556/go.mod h1:jgGO4aPhMVssidjWuPd0V478p7sUYnq755LzQQqFZ3s=
 github.com/project-draco/naming v0.0.0-20190222114625-fa4e2904ff93 h1:tDq3uds0oxcmGuRsC88ppCVRaTrh1mJIzXCIF9/3Mmo=
 github.com/project-draco/naming v0.0.0-20190222114625-fa4e2904ff93/go.mod h1:PHVLSw75bWAJ/VDTxUbgBB1/P8xX6yYbjGd/2kmLmLk=
 github.com/project-draco/pkg v0.0.0-20191018193929-a935478160e3 h1:B1EZSueC9RRJQPY7+7jJyezdRatkSN3jls3avptX1eg=

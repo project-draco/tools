@@ -21,6 +21,8 @@ import (
 func main() {
 	repeat := flag.Int("repeat", 0, "Repeat")
 	mono := flag.Bool("mono", false, "Mono-objective")
+	output := flag.String("output", "bestmq", "bestmq|paretto")
+	outputdir := flag.String("output-dir", "", "output dir")
 	cpuprofile := flag.String("cpuprofile", "", "write cpu profile to file")
 	memprofile := flag.String("memprofile", "", "write mem profile to file")
 	flag.Parse()
@@ -221,24 +223,22 @@ func main() {
 		fmt.Fprintln(os.Stderr, err)
 		return
 	}
-	clusters := map[int64][]string{}
-	for i := 0; i < len(vertices); i++ {
-		c := result.BestIndividual.Value(i).(binary.BinaryString).Int().Int64()
-		if _, ok := clusters[c]; !ok {
-			clusters[c] = []string{}
+	if *output == "bestmq" {
+		ind := result.Individuals[result.BestIndividualIndex]
+		fmt.Print(individualAsDigraph(ind, names))
+		fmt.Fprintln(os.Stderr, result.BestObjective[0])
+	} else {
+		for i, ind := range result.Individuals {
+			g := individualAsDigraph(ind, names)
+			f, err := os.Create(fmt.Sprintf("%vgraph%v.dot", *outputdir, i))
+			if err != nil {
+				fmt.Fprintln(os.Stderr, err)
+				return
+			}
+			fmt.Fprint(f, g)
+			f.Close()
 		}
-		clusters[c] = append(clusters[c], names[i])
 	}
-	fmt.Println("digraph {")
-	for k, v := range clusters {
-		fmt.Printf("subgraph cluster%v {\n", k)
-		for _, n := range v {
-			fmt.Printf("\"%v\";\n", n)
-		}
-		fmt.Println("}")
-	}
-	fmt.Println("}")
-	fmt.Fprintln(os.Stderr, result.BestObjective[0])
 	if *memprofile != "" {
 		f, err := os.Create(*memprofile)
 		if err != nil {
@@ -247,4 +247,29 @@ func main() {
 		pprof.WriteHeapProfile(f)
 		f.Close()
 	}
+}
+
+func individualAsDigraph(
+	ind moea.IndividualResult,
+	names map[int]string,
+) string {
+	clusters := map[int64][]string{}
+	for i := 0; i < len(names); i++ {
+		c := ind.Values[i].(binary.BinaryString).Int().Int64()
+		if _, ok := clusters[c]; !ok {
+			clusters[c] = []string{}
+		}
+		clusters[c] = append(clusters[c], names[i])
+	}
+	var buf strings.Builder
+	buf.WriteString("digraph {\n")
+	for k, v := range clusters {
+		buf.WriteString(fmt.Sprintf("subgraph cluster%v {\n", k))
+		for _, n := range v {
+			buf.WriteString(fmt.Sprintf("\"%v\";\n", n))
+		}
+		buf.WriteString("}\n")
+	}
+	buf.WriteString("}\n")
+	return buf.String()
 }

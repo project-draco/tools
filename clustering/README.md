@@ -12,4 +12,4 @@ https://github.com/project-draco/tools/releases/tag/v1.0
 
 ## Running
 
-```$ clustering[.exe|-macos|-linux|-linux-arm] [--mono] [--repeat=n] < software.mdg > software.dot```
+```$ clustering[.exe|-macos|-linux|-linux-arm] [--mono] [--repeat=n] [--output=bestmq|paretto] [--output-dir=<dir>] < software.mdg > software.dot```
