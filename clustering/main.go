@@ -228,6 +228,9 @@ func main() {
 		fmt.Print(individualAsDigraph(ind, names))
 		fmt.Fprintln(os.Stderr, result.BestObjective[0])
 	} else {
+		if (*outputdir)[len(*outputdir)-1] != '/' {
+			*outputdir = *outputdir + "/"
+		}
 		for i, ind := range result.Individuals {
 			g := individualAsDigraph(ind, names)
 			f, err := os.Create(fmt.Sprintf("%vgraph%v.dot", *outputdir, i))
