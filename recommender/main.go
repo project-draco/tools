@@ -14,6 +14,16 @@ import (
 	"github.com/project-draco/pkg/entity"
 )
 
+type config struct {
+	dotfile,
+	staticmdg,
+	cochangemdg,
+	errorsfile,
+	inheritancefile,
+	fieldtypesfile,
+	supplementalRefactorings string
+}
+
 var before = map[string]float64{
 	"reusability": 1, "flexibility": 1, "understandability": -0.99,
 	"reusability2": 1, "flexibility2": 1, "understandability2": -0.99,
@@ -36,28 +46,40 @@ func main() {
 		"allow method to depend on current class",
 	)
 	supplementalRefactorings := flag.String("supplemental-refactorings", "", "")
-	config := flag.String("config", "", "")
+	configfile := flag.String("config", "", "")
 	flag.Parse()
-	if flag.NArg() < 4 && *config == "" {
+	if flag.NArg() < 4 && *configfile == "" {
 		fmt.Printf("usage: recommender <static mdg file> <co-change mdg file> <errors file> [<inheritance> <field types>]\n")
 		return
 	}
-	var args [][]string
-	if *config == "" {
-		args = append(args, []string{*dotfile, flag.Arg(0), flag.Arg(1), flag.Arg(2)})
+	var configs []config
+	if *configfile == "" {
+		configs = append(configs, config{*dotfile, flag.Arg(0), flag.Arg(1), flag.Arg(2), "", "", ""})
 		if flag.NArg() >= 4 {
-			args[0] = append(args[0], flag.Arg(3))
+			configs[0].inheritancefile = flag.Arg(3)
 		}
 		if flag.NArg() >= 5 {
-			args[0] = append(args[0], flag.Arg(4))
+			configs[0].fieldtypesfile = flag.Arg(4)
 		}
 	} else {
-		fc, err := os.Open(*config)
+		fc, err := os.Open(*configfile)
 		check(err, "could not open config")
 		defer fc.Close()
 		s := bufio.NewScanner(fc)
 		for s.Scan() {
-			args = append(args, strings.Split(s.Text(), ";"))
+			configfields := strings.Split(s.Text(), ";")
+			for i := len(configfields); i < 7; i++ {
+				configfields = append(configfields, "")
+			}
+			configs = append(configs, config{
+				configfields[0],
+				configfields[1],
+				configfields[2],
+				configfields[3],
+				configfields[4],
+				configfields[5],
+				configfields[6],
+			})
 		}
 		check(s.Err(), "could not read config")
 	}
@@ -65,10 +87,10 @@ func main() {
 	if *output == "csv" {
 		fmt.Println("subject;sc;ec;sdc;ccdc;cd;cboo;mpco;pco;ro;fo;uo;cbow;mpcw;pcw;rw;fw;uw")
 	}
-	for i, a := range args {
+	for i, cfg := range configs {
 		computeMetrics := *output == "metric" || *output == "metapost" || *output == "csv"
 		smells, improvements, attributes := doAnalysis(
-			a,
+			cfg,
 			*output == "suggestions",
 			computeMetrics,
 			*supplementalRefactorings,
@@ -84,7 +106,7 @@ func main() {
 			}
 		} else if *output == "csv" {
 			fmt.Printf("%v;%v;%v;%v;%v;%v;",
-				a[0],
+				cfg.dotfile,
 				len(smells),
 				attributes["entities-count"],
 				attributes["static-dependencies-count"],
@@ -108,7 +130,7 @@ func main() {
 			}
 			fmt.Println()
 		} else {
-			fmt.Print(a[0])
+			fmt.Print(cfg.dotfile)
 			if *output == "count" {
 				fmt.Printf(": %v\n", len(smells))
 			} else {
@@ -116,7 +138,7 @@ func main() {
 				for _, s := range smells {
 					fmt.Println(s.entity, s.target, s.depcount, s.candidates)
 				}
-				if i < len(args)-1 {
+				if i < len(configs)-1 {
 					fmt.Println()
 				}
 			}
@@ -128,7 +150,7 @@ func main() {
 }
 
 func doAnalysis(
-	args []string,
+	args config,
 	searchCandidates,
 	metric bool,
 	supplementalRefactorings string,
@@ -137,9 +159,9 @@ func doAnalysis(
 	allowToDependOnCurrentClass bool,
 ) ([]smell, []map[string]float64, map[string]float64) {
 	var clusteredgraph *gographviz.Graph
-	if args[0] != "" {
+	if args.cochangemdg != "" {
 		var err error
-		buf, err := ioutil.ReadFile(args[0])
+		buf, err := ioutil.ReadFile(args.dotfile)
 		check(err, "could not read dot file ")
 		ast, err := gographviz.Parse(buf)
 		check(err, "could not parse dot file")
@@ -147,13 +169,13 @@ func doAnalysis(
 		err = gographviz.Analyse(ast, clusteredgraph)
 		check(err, "could not analyse dot file")
 	}
-	f1, err := os.Open(args[1])
+	f1, err := os.Open(args.staticmdg)
 	check(err, "could not open static mdg file")
 	defer f1.Close()
-	f2, err := os.Open(args[2])
+	f2, err := os.Open(args.cochangemdg)
 	check(err, "could not open co-change mdg file")
 	defer f2.Close()
-	f3, err := os.Open(args[3])
+	f3, err := os.Open(args.errorsfile)
 	check(err, "could not open errors file")
 	defer f3.Close()
 	sdfinder, err := newFinder(f1, f3)
@@ -161,8 +183,8 @@ func doAnalysis(
 	ccdfinder, err := newFinder(f2, nil)
 	check(err, "could not create co-change dependencies finder")
 	var inh *inheritance
-	if len(args) >= 5 {
-		fi, err := os.Open(args[4])
+	if args.inheritancefile != "" {
+		fi, err := os.Open(args.inheritancefile)
 		check(err, "could not open inheritance file")
 		defer fi.Close()
 		inh, err = newInheritance(fi)
@@ -201,11 +223,11 @@ func doAnalysis(
 	var ii []map[string]float64
 	if metric {
 		fieldTypesFileName := ""
-		if len(args) >= 6 {
-			fieldTypesFileName = args[5]
+		if args.inheritancefile != "" {
+			fieldTypesFileName = args.inheritancefile
 		}
-		if len(args) >= 7 && supplementalRefactorings == "" {
-			supplementalRefactorings = args[6]
+		if args.supplementalRefactorings != "" && supplementalRefactorings == "" {
+			supplementalRefactorings = args.supplementalRefactorings
 		}
 		ii = computeMetrics(sdfinder, ccdfinder, smells, inh,
 			supplementalRefactorings, fieldTypesFileName, f1, f2)
