@@ -30,7 +30,8 @@ func TestFindEvolutionarySmells(t *testing.T) {
 	`)
 	ccfinder, err := newFinder(ccdreader, nil)
 	checkT(t, err)
-	smells, err := findEvolutionarySmellsUsingClusters(sdreader, cg, sdfinder, ccfinder, nil, true)
+	smells, err := findEvolutionarySmellsUsingClusters(sdreader, cg, sdfinder, ccfinder, nil)
+	smells = searchCandidates(smells, sdreader, sdfinder, ccfinder)
 	checkT(t, err)
 	if len(smells) != 1 {
 		t.Errorf("Expected %v but was %v", 1, len(smells))
@@ -52,7 +53,7 @@ func TestFindEvolutionarySmells(t *testing.T) {
 	ccfinder, err = newFinder(ccdreader, nil)
 	checkT(t, err)
 	smells, err = findEvolutionarySmellsUsingDependencies(
-		sdreader, ccdreader, sdfinder, ccfinder, nil, nil, false, 0, 0,
+		sdreader, ccdreader, sdfinder, ccfinder, nil, nil, 0, 0,
 	)
 	checkT(t, err)
 	if len(smells) != 1 {

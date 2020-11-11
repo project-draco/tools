@@ -169,7 +169,7 @@ func main() {
 
 func doAnalysis(
 	cfg config,
-	searchCandidates,
+	mustSearchCandidates,
 	metric bool,
 	supplementalRefactorings string,
 	minimumSupportCount int,
@@ -231,15 +231,18 @@ func doAnalysis(
 					sdfinder, e, fromfilename, inh, ignore,
 				)
 			},
-			inh, searchCandidates,
+			inh,
 			minimumSupportCount,
 			minimumConfidence,
 		)
 		check(err, "could not find smells")
+		if mustSearchCandidates {
+			smells = searchCandidates(smells, f1, sdfinder, ccdfinder)
+		}
 	} else {
 		for _, clusteredgraph := range clusteredgraphs {
 			ss, err := findEvolutionarySmellsUsingClusters(
-				f1, clusteredgraph, sdfinder, ccdfinder, inh, searchCandidates,
+				f1, clusteredgraph, sdfinder, ccdfinder, inh,
 			)
 			check(err, "could not find smells")
 		next_smell:
@@ -259,6 +262,9 @@ func doAnalysis(
 				}
 				smells = append(smells, s)
 			}
+		}
+		if mustSearchCandidates {
+			smells = searchCandidates(smells, f1, sdfinder, ccdfinder)
 		}
 	}
 

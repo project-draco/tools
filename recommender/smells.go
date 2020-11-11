@@ -12,9 +12,9 @@ import (
 
 type (
 	smell struct {
-		entity, target string
-		depcount       int
-		candidates     []candidate
+		entity, target, filename string
+		depcount                 int
+		candidates               []candidate
 	}
 	candidate struct {
 		name     string
@@ -31,7 +31,6 @@ func findEvolutionarySmellsUsingClusters(
 	clusteredgraph *gographviz.Graph,
 	sdfinder, ccdfinder *finder,
 	inh *inheritance,
-	searchCandidates bool,
 ) ([]smell, error) {
 	var smells []smell
 	for clustername := range clusteredgraph.SubGraphs.SubGraphs {
@@ -60,8 +59,9 @@ func findEvolutionarySmellsUsingClusters(
 				for fn := range clusterEntitiesByFile {
 					ffnn = append(ffnn, fn)
 				}
-				smells = addSmell(smells, e, sdReader, filename, ffnn,
-					sdfinder, ccdfinder, searchCandidates)
+				smells = addSmell(
+					smells, e, sdReader, filename, ffnn, sdfinder, ccdfinder,
+				)
 			}
 		}
 	}
@@ -73,7 +73,6 @@ func findEvolutionarySmellsUsingDependencies(
 	sdfinder, ccdfinder *finder,
 	precondition func(e entity.Entity, fromfilename, tofilename string, ignore []string) bool,
 	inh *inheritance,
-	searchCandidates bool,
 	minimumSupportCount int,
 	minimumConfidence float64,
 ) ([]smell, error) {
@@ -126,7 +125,6 @@ next:
 			files,
 			sdfinder,
 			ccdfinder,
-			searchCandidates,
 		)
 	}
 
@@ -176,30 +174,44 @@ func addSmell(
 	filename string,
 	filenames []string,
 	sdfinder, ccdfinder *finder,
-	searchCandidates bool,
 ) []smell {
 	var cs []candidate
 	for _, fn := range filenames {
 		cs = append(cs, candidate{fn, 0})
 	}
-	smell := smell{entity: strings.TrimSpace(e), candidates: cs}
-	if searchCandidates {
+	smell := smell{entity: strings.TrimSpace(e), candidates: cs, filename: filename}
+	return append(smells, smell)
+}
+
+func searchCandidates(
+	smells []smell,
+	sdReader io.ReadSeeker,
+	sdfinder,
+	ccdfinder *finder,
+) (result []smell) {
+	for _, smell := range smells {
+		var filenames []string
+		for _, c := range smell.candidates {
+			filenames = append(filenames, c.name)
+		}
+		smell := smell
 		bestCandidate, maxDependenciesToBeRemoved := findBestCandidate(
 			sdReader,
-			entity.Entity(e).QueryString(),
-			filename,
+			entity.Entity(smell.entity).QueryString(),
+			smell.filename,
 			filenames,
 			sdfinder,
 			ccdfinder,
 			&smell,
 		)
 		if bestCandidate == "" || maxDependenciesToBeRemoved == 0 {
-			return smells
+			continue
 		}
 		smell.target = bestCandidate
 		smell.depcount = maxDependenciesToBeRemoved
+		result = append(result, smell)
 	}
-	return append(smells, smell)
+	return result
 }
 
 func findBestCandidate(
