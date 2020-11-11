@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"strings"
 
@@ -9,13 +10,20 @@ import (
 	"github.com/project-draco/pkg/entity"
 )
 
-type smell struct {
-	entity, target string
-	depcount       int
-	candidates     []struct {
+type (
+	smell struct {
+		entity, target string
+		depcount       int
+		candidates     []candidate
+	}
+	candidate struct {
 		name     string
 		depcount int
 	}
+)
+
+func (s smell) String() string {
+	return fmt.Sprintf("%v -> %v (depcount: %v, candidates: %v)", s.entity, s.target, s.depcount, s.candidates)
 }
 
 func findEvolutionarySmellsUsingClusters(
@@ -166,49 +174,51 @@ func addSmell(
 	e string,
 	sdReader io.ReadSeeker,
 	filename string,
-	ffnn []string,
+	filenames []string,
 	sdfinder, ccdfinder *finder,
 	searchCandidates bool,
 ) []smell {
-	var cs []struct {
-		name     string
-		depcount int
-	}
-	for _, fn := range ffnn {
-		cs = append(cs, struct {
-			name     string
-			depcount int
-		}{fn, 0})
+	var cs []candidate
+	for _, fn := range filenames {
+		cs = append(cs, candidate{fn, 0})
 	}
 	smell := smell{entity: strings.TrimSpace(e), candidates: cs}
 	if searchCandidates {
 		bestCandidate, maxDependenciesToBeRemoved := findBestCandidate(
-			sdReader, entity.Entity(e).QueryString(), filename, ffnn,
-			sdfinder, ccdfinder, &smell)
-		if bestCandidate != "" && maxDependenciesToBeRemoved >= 0 {
-			smell.target = bestCandidate
-			smell.depcount = maxDependenciesToBeRemoved
-			return append(smells, smell)
+			sdReader,
+			entity.Entity(e).QueryString(),
+			filename,
+			filenames,
+			sdfinder,
+			ccdfinder,
+			&smell,
+		)
+		if bestCandidate == "" || maxDependenciesToBeRemoved == 0 {
+			return smells
 		}
-	} else {
-		return append(smells, smell)
+		smell.target = bestCandidate
+		smell.depcount = maxDependenciesToBeRemoved
 	}
-	return smells
+	return append(smells, smell)
 }
 
 func findBestCandidate(
 	sdReader io.ReadSeeker,
-	querystring, filename string,
+	querystring,
+	filename string,
 	candidatesFileNames []string,
-	sdfinder, ccdfinder *finder,
+	sdfinder,
+	ccdfinder *finder,
 	smell *smell,
 ) (string, int) {
 	dependenciesBefore := -1
+	var prevGraph *graph
 	if sdReader != nil {
 		sdReader.Seek(0, 0)
 		sdGraph, err := newGraph(nil, sdReader)
 		check(err, "could not create graph from static dependencies")
 		dependenciesBefore = sdGraph.edgesCount()
+		prevGraph = sdGraph
 	}
 	var bestCandidate string
 	maxDependenciesToBeRemoved := -1
@@ -220,7 +230,8 @@ func findBestCandidate(
 		// to check co-change dependencies too
 		dbf := append(
 			sdfinder.dependenciesBetweenFiles(filename, candidatefilename),
-			ccdfinder.dependenciesBetweenFiles(filename, candidatefilename)...)
+			ccdfinder.dependenciesBetweenFiles(filename, candidatefilename)...,
+		)
 		foundAnotherDependencyNotInvolvingCurrentEntity := false
 		dependenciesInvolvingCurrentEntity := 0
 		for _, d := range dbf {
@@ -238,14 +249,13 @@ func findBestCandidate(
 			check(err, "could not create graph from static dependencies and refactoring")
 			after := sdGraph.edgesCount()
 			if dependenciesBefore < after {
+				_ = prevGraph
+				//fmt.Println(querystring, candidatefilename, prevGraph.diff(sdGraph))
 				continue
 			}
 		}
 		if smell != nil {
-			smell.candidates = append(smell.candidates, struct {
-				name     string
-				depcount int
-			}{
+			smell.candidates = append(smell.candidates, candidate{
 				candidatefilename,
 				dependenciesInvolvingCurrentEntity,
 			})

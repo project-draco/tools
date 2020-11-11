@@ -8,6 +8,7 @@ import (
 	"log"
 	"math"
 	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/awalterschulze/gographviz"
@@ -15,7 +16,7 @@ import (
 )
 
 type config struct {
-	dotfile,
+	dotfile []string
 	staticmdg,
 	cochangemdg,
 	errorsfile,
@@ -34,6 +35,7 @@ func main() {
 	output := flag.String("output", "",
 		"one of: smells (default), suggestions, metric, count, csv, metapost")
 	dotfile := flag.String("dot-file", "", "")
+	dotdir := flag.String("dot-dir", "", "")
 	minimumSupportCount := flag.Int(
 		"minimum-support-count", 2, "minimum support count",
 	)
@@ -48,13 +50,25 @@ func main() {
 	supplementalRefactorings := flag.String("supplemental-refactorings", "", "")
 	configfile := flag.String("config", "", "")
 	flag.Parse()
-	if flag.NArg() < 4 && *configfile == "" {
+	if flag.NArg() < 3 && *configfile == "" {
 		fmt.Printf("usage: recommender <static mdg file> <co-change mdg file> <errors file> [<inheritance> <field types>]\n")
 		return
 	}
 	var configs []config
 	if *configfile == "" {
-		configs = append(configs, config{*dotfile, flag.Arg(0), flag.Arg(1), flag.Arg(2), "", "", ""})
+		var dotfiles []string
+		if *dotdir == "" {
+			dotfiles = []string{*dotfile}
+		} else {
+			f, err := os.Open(*dotdir)
+			check(err, "could not open dotdir")
+			fis, err := f.Readdir(0)
+			check(err, "could not read dotdir")
+			for _, fi := range fis {
+				dotfiles = append(dotfiles, filepath.Join(*dotdir, fi.Name()))
+			}
+		}
+		configs = append(configs, config{dotfiles, flag.Arg(0), flag.Arg(1), flag.Arg(2), "", "", ""})
 		if flag.NArg() >= 4 {
 			configs[0].inheritancefile = flag.Arg(3)
 		}
@@ -72,7 +86,7 @@ func main() {
 				configfields = append(configfields, "")
 			}
 			configs = append(configs, config{
-				configfields[0],
+				[]string{configfields[0]},
 				configfields[1],
 				configfields[2],
 				configfields[3],
@@ -130,13 +144,17 @@ func main() {
 			}
 			fmt.Println()
 		} else {
-			fmt.Print(cfg.dotfile)
+			if *dotdir == "" {
+				fmt.Print(cfg.dotfile[0])
+			} else {
+				fmt.Print(*dotdir)
+			}
 			if *output == "count" {
 				fmt.Printf(": %v\n", len(smells))
 			} else {
 				fmt.Println()
 				for _, s := range smells {
-					fmt.Println(s.entity, s.target, s.depcount, s.candidates)
+					fmt.Println(s)
 				}
 				if i < len(configs)-1 {
 					fmt.Println()
@@ -150,7 +168,7 @@ func main() {
 }
 
 func doAnalysis(
-	args config,
+	cfg config,
 	searchCandidates,
 	metric bool,
 	supplementalRefactorings string,
@@ -158,24 +176,28 @@ func doAnalysis(
 	minimumConfidence float64,
 	allowToDependOnCurrentClass bool,
 ) ([]smell, []map[string]float64, map[string]float64) {
-	var clusteredgraph *gographviz.Graph
-	if args.cochangemdg != "" {
+	var clusteredgraphs []*gographviz.Graph
+	for _, dotfile := range cfg.dotfile {
+		if dotfile == "" {
+			continue
+		}
 		var err error
-		buf, err := ioutil.ReadFile(args.dotfile)
-		check(err, "could not read dot file ")
+		buf, err := ioutil.ReadFile(dotfile)
+		check(err, "could not read dot file")
 		ast, err := gographviz.Parse(buf)
 		check(err, "could not parse dot file")
-		clusteredgraph = gographviz.NewGraph()
+		clusteredgraph := gographviz.NewGraph()
 		err = gographviz.Analyse(ast, clusteredgraph)
 		check(err, "could not analyse dot file")
+		clusteredgraphs = append(clusteredgraphs, clusteredgraph)
 	}
-	f1, err := os.Open(args.staticmdg)
+	f1, err := os.Open(cfg.staticmdg)
 	check(err, "could not open static mdg file")
 	defer f1.Close()
-	f2, err := os.Open(args.cochangemdg)
+	f2, err := os.Open(cfg.cochangemdg)
 	check(err, "could not open co-change mdg file")
 	defer f2.Close()
-	f3, err := os.Open(args.errorsfile)
+	f3, err := os.Open(cfg.errorsfile)
 	check(err, "could not open errors file")
 	defer f3.Close()
 	sdfinder, err := newFinder(f1, f3)
@@ -183,15 +205,15 @@ func doAnalysis(
 	ccdfinder, err := newFinder(f2, nil)
 	check(err, "could not create co-change dependencies finder")
 	var inh *inheritance
-	if args.inheritancefile != "" {
-		fi, err := os.Open(args.inheritancefile)
+	if cfg.inheritancefile != "" {
+		fi, err := os.Open(cfg.inheritancefile)
 		check(err, "could not open inheritance file")
 		defer fi.Close()
 		inh, err = newInheritance(fi)
 		check(err, "could not read inheritance file")
 	}
 	var smells []smell
-	if clusteredgraph == nil {
+	if len(clusteredgraphs) == 0 {
 		smells, err = findEvolutionarySmellsUsingDependencies(
 			f1, f2, sdfinder, ccdfinder,
 			func(e entity.Entity, fromfilename, tofilename string, ignore []string) bool {
@@ -213,31 +235,58 @@ func doAnalysis(
 			minimumSupportCount,
 			minimumConfidence,
 		)
+		check(err, "could not find smells")
 	} else {
-		smells, err = findEvolutionarySmellsUsingClusters(
-			f1, clusteredgraph, sdfinder, ccdfinder, inh, searchCandidates,
-		)
+		for _, clusteredgraph := range clusteredgraphs {
+			ss, err := findEvolutionarySmellsUsingClusters(
+				f1, clusteredgraph, sdfinder, ccdfinder, inh, searchCandidates,
+			)
+			check(err, "could not find smells")
+		next_smell:
+			for _, s := range ss {
+				for i, s_ := range smells {
+					if s.entity == s_.entity && s.target == s_.target {
+						for _, c := range s.candidates {
+							for _, c_ := range s.candidates {
+								if c.depcount < c_.depcount {
+									continue next_smell
+								}
+							}
+						}
+						smells[i] = s
+						continue next_smell
+					}
+				}
+				smells = append(smells, s)
+			}
+		}
 	}
-	check(err, "could not find smells")
 
 	var ii []map[string]float64
 	if metric {
 		fieldTypesFileName := ""
-		if args.inheritancefile != "" {
-			fieldTypesFileName = args.inheritancefile
+		if cfg.inheritancefile != "" {
+			fieldTypesFileName = cfg.inheritancefile
 		}
-		if args.supplementalRefactorings != "" && supplementalRefactorings == "" {
-			supplementalRefactorings = args.supplementalRefactorings
+		if cfg.supplementalRefactorings != "" && supplementalRefactorings == "" {
+			supplementalRefactorings = cfg.supplementalRefactorings
 		}
 		ii = computeMetrics(sdfinder, ccdfinder, smells, inh,
 			supplementalRefactorings, fieldTypesFileName, f1, f2)
 	}
 
+	var clustersdensitysum, avgclustersdensity float64
+	for _, clusteredgraph := range clusteredgraphs {
+		clustersdensitysum += density(clusteredgraph, ccdfinder)
+	}
+	if len(clusteredgraphs) > 0 {
+		avgclustersdensity = clustersdensitysum / avgclustersdensity
+	}
 	attrs := map[string]float64{
 		"entities-count":               float64(sdfinder.entitiesCount()),
 		"static-dependencies-count":    float64(sdfinder.dependenciesCount()),
 		"co-change-dependencies-count": float64(ccdfinder.dependenciesCount()),
-		"clusters-density":             density(clusteredgraph, ccdfinder),
+		"clusters-density":             avgclustersdensity,
 	}
 
 	return smells, ii, attrs

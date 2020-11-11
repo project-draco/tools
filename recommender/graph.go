@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io"
 
 	scanner "github.com/project-draco/pkg/dependency-scanner"
@@ -22,23 +23,25 @@ func newGraph(reassignments map[string]string, readers ...io.Reader) (*graph, er
 			if len(d.From) != 1 {
 				continue
 			}
-			for _, e := range []string{d.From[0], d.To} {
-				if _, ok := g.index[entity.Entity(e).Filename()]; !ok {
-					g.index[entity.Entity(e).Filename()] = len(g.successors)
-					g.successors = append(g.successors, nil)
-					g.weigths = append(g.weigths, nil)
-				}
-			}
 			source := entity.Entity(d.From[0]).Filename()
 			destination := entity.Entity(d.To).Filename()
-			if fn, ok := reassignments[entity.Entity(d.From[0]).QueryString()]; ok {
-				source = fn
+			if filename, ok := reassignments[entity.Entity(d.From[0]).QueryString()]; ok {
+				//fmt.Printf("reassigned source %v to %v\n(%v)\n", source, filename, d)
+				source = filename
 			}
-			if fn, ok := reassignments[entity.Entity(d.To).QueryString()]; ok {
-				destination = fn
+			if filename, ok := reassignments[entity.Entity(d.To).QueryString()]; ok {
+				//fmt.Printf("reassigned destination %v to %v\n(%v)\n", destination, filename, d)
+				destination = filename
 			}
 			if source == destination {
 				continue
+			}
+			for _, filename := range []string{source, destination} {
+				if _, ok := g.index[filename]; !ok {
+					g.index[filename] = len(g.successors)
+					g.successors = append(g.successors, nil)
+					g.weigths = append(g.weigths, nil)
+				}
 			}
 			found := -1
 			for i, v := range g.successors[g.index[source]] {
@@ -90,4 +93,26 @@ func (g *graph) edgesCount() int {
 		count += len(ss)
 	}
 	return count
+}
+
+func (g *graph) diff(other *graph) (result map[string]string) {
+	if len(g.index) != len(other.index) {
+		panic(fmt.Errorf("comparing graphs of different sizes: %v, %v", len(g.index), len(other.index)))
+	}
+	for key, idx := range g.index {
+		otheridx, ok := other.index[key]
+		if !ok {
+			panic(fmt.Errorf("key not found on other graph: %v", key))
+		}
+		otherlen := len(other.successors[otheridx])
+		glen := len(g.successors[idx])
+		diff := otherlen - glen
+		if diff != 0 {
+			if result == nil {
+				result = make(map[string]string)
+			}
+			result[key] = fmt.Sprintf("%v, %v, %v, %v", glen, otherlen, diff, other.successors[otheridx])
+		}
+	}
+	return result
 }
