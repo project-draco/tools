@@ -16,7 +16,7 @@ import (
 )
 
 type config struct {
-	dotfile []string
+	dotfiles []string
 	staticmdg,
 	cochangemdg,
 	errorsfile,
@@ -97,13 +97,13 @@ func main() {
 		}
 		check(s.Err(), "could not read config")
 	}
-	var ii [][]map[string]float64
+	var improvements [][]map[string]float64
 	if *output == "csv" {
 		fmt.Println("subject;sc;ec;sdc;ccdc;cd;cboo;mpco;pco;ro;fo;uo;cbow;mpcw;pcw;rw;fw;uw")
 	}
 	for i, cfg := range configs {
 		computeMetrics := *output == "metric" || *output == "metapost" || *output == "csv"
-		smells, improvements, attributes := doAnalysis(
+		smells, configImprovements, attributes := doAnalysis(
 			cfg,
 			*output == "suggestions",
 			computeMetrics,
@@ -113,14 +113,14 @@ func main() {
 			*allowToDependOnCurrentClass,
 		)
 		if *output == "metapost" {
-			ii = append(ii, improvements)
+			improvements = append(improvements, configImprovements)
 		} else if *output == "metric" {
-			for _, imp := range improvements {
+			for _, imp := range configImprovements {
 				fmt.Println(imp)
 			}
 		} else if *output == "csv" {
 			fmt.Printf("%v;%v;%v;%v;%v;%v;",
-				cfg.dotfile,
+				cfg.dotfiles,
 				len(smells),
 				attributes["entities-count"],
 				attributes["static-dependencies-count"],
@@ -136,8 +136,8 @@ func main() {
 						sep = ";"
 					}
 					change := ""
-					if len(improvements) > i {
-						change = fmt.Sprintf("%v", improvements[i][metric]-before[metric])
+					if len(configImprovements) > i {
+						change = fmt.Sprintf("%v", configImprovements[i][metric]-before[metric])
 					}
 					fmt.Printf("%v%v", change, sep)
 				}
@@ -145,7 +145,7 @@ func main() {
 			fmt.Println()
 		} else {
 			if *dotdir == "" {
-				fmt.Print(cfg.dotfile[0])
+				fmt.Print(cfg.dotfiles[0])
 			} else {
 				fmt.Print(*dotdir)
 			}
@@ -163,7 +163,7 @@ func main() {
 		}
 	}
 	if *output == "metapost" {
-		printMetapost(ii)
+		printMetapost(improvements)
 	}
 }
 
@@ -177,7 +177,7 @@ func doAnalysis(
 	allowToDependOnCurrentClass bool,
 ) ([]smell, []map[string]float64, map[string]float64) {
 	var clusteredgraphs []*gographviz.Graph
-	for _, dotfile := range cfg.dotfile {
+	for _, dotfile := range cfg.dotfiles {
 		if dotfile == "" {
 			continue
 		}
@@ -268,16 +268,16 @@ func doAnalysis(
 		}
 	}
 
-	var ii []map[string]float64
+	var improvements []map[string]float64
 	if metric {
 		fieldTypesFileName := ""
-		if cfg.inheritancefile != "" {
-			fieldTypesFileName = cfg.inheritancefile
+		if cfg.fieldtypesfile != "" {
+			fieldTypesFileName = cfg.fieldtypesfile
 		}
 		if cfg.supplementalRefactorings != "" && supplementalRefactorings == "" {
 			supplementalRefactorings = cfg.supplementalRefactorings
 		}
-		ii = computeMetrics(sdfinder, ccdfinder, smells, inh,
+		improvements = computeMetrics(sdfinder, ccdfinder, smells, inh,
 			supplementalRefactorings, fieldTypesFileName, f1, f2)
 	}
 
@@ -295,7 +295,7 @@ func doAnalysis(
 		"clusters-density":             avgclustersdensity,
 	}
 
-	return smells, ii, attrs
+	return smells, improvements, attrs
 }
 
 func computeMetrics(
@@ -306,7 +306,6 @@ func computeMetrics(
 	fieldTypesFileName string,
 	f1, f2 *os.File,
 ) []map[string]float64 {
-	var ii []map[string]float64
 	var fldTypes *fieldTypes
 	if fieldTypesFileName != "" {
 		fft, err := os.Open(fieldTypesFileName)
@@ -317,12 +316,11 @@ func computeMetrics(
 	}
 	var reassignments []map[string]string
 	evolutionaryReassignments := map[string]string{}
-	baselineReassignments := map[string]string{}
-	joinReassignments := map[string]string{}
+	joinedReassignments := map[string]string{}
 	for _, s := range smells {
 		if s.target != "" {
 			evolutionaryReassignments[entity.Entity(s.entity).QueryString()] = s.target
-			joinReassignments[entity.Entity(s.entity).QueryString()] = s.target
+			joinedReassignments[entity.Entity(s.entity).QueryString()] = s.target
 		}
 	}
 	reassignments = append(reassignments, evolutionaryReassignments)
@@ -330,6 +328,7 @@ func computeMetrics(
 		srf, err := os.Open(supplementalRefactorings)
 		check(err, "could not opend supplemental refactorigs file")
 		defer srf.Close()
+		supplementalReassignments := map[string]string{}
 		s := bufio.NewScanner(srf)
 		for s.Scan() {
 			arr := strings.Split(s.Text(), ";")
@@ -347,16 +346,15 @@ func computeMetrics(
 				nil,
 			)
 			if bestCandidate != "" {
-				baselineReassignments[ent.QueryString()] = bestCandidate
-				joinReassignments[ent.QueryString()] = bestCandidate
+				supplementalReassignments[ent.QueryString()] = bestCandidate
+				joinedReassignments[ent.QueryString()] = bestCandidate
 			}
 		}
 		check(s.Err(), "could not read supplemental refactorings file")
-		reassignments = append(reassignments, baselineReassignments)
-		reassignments = append(reassignments, joinReassignments)
+		reassignments = append(reassignments, supplementalReassignments)
+		reassignments = append(reassignments, joinedReassignments)
 	}
-	ii = improvements(reassignments, inh, fldTypes, sdfinder, f1, f2)
-	return ii
+	return improvements(reassignments, inh, fldTypes, sdfinder, f1, f2)
 }
 
 func printMetapost(ii [][]map[string]float64) {
