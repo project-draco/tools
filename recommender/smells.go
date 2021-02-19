@@ -30,6 +30,7 @@ func findEvolutionarySmellsUsingClusters(
 	sdReader io.ReadSeeker,
 	clusteredgraph *gographviz.Graph,
 	sdfinder, ccdfinder *finder,
+	precondition func(e entity.Entity, fromfilename, tofilename string, ignore []string) bool,
 	inh *inheritance,
 ) ([]smell, error) {
 	var smells []smell
@@ -48,11 +49,13 @@ func findEvolutionarySmellsUsingClusters(
 				continue
 			}
 			for _, e := range entities {
-				// discard entities without static dependencies to attempt to avoid dead code
-				// discard entity that depends on another entity inside the same class
-				if !haveAtLeastOneStaticDependencyButNoneWithinTheSameFileOrTheSuperclass(
-					sdfinder, entity.Entity(e), filename, inh, []string{},
-				) {
+				if precondition != nil &&
+					!precondition(
+						entity.Entity(e),
+						entity.Entity(e).Filename(),
+						filename,
+						[]string{},
+					) {
 					continue
 				}
 				var ffnn []string
@@ -131,6 +134,8 @@ next:
 	return smells, nil
 }
 
+// discard entities without static dependencies to attempt to avoid dead code
+// discard entity that depends on another entity inside the same class
 func haveAtLeastOneStaticDependencyButNoneWithinTheSameFileOrTheSuperclass(
 	f *finder,
 	e entity.Entity,

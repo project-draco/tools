@@ -216,6 +216,21 @@ func doAnalysis(
 		inh, err = newInheritance(fi)
 		check(err, "could not read inheritance file")
 	}
+	precondition := func(e entity.Entity, fromfilename, tofilename string, ignore []string) bool {
+		// relaxes constraint of "evolutionary smell",
+		// by allowing method to depend on current class if
+		// static dependencies between the source and
+		// destination classes of the co-change dependency
+		// under analysis already exist
+		if allowToDependOnCurrentClass &&
+			fromfilename != tofilename &&
+			sdfinder.hasDependenciesBetweenFiles(fromfilename, tofilename) {
+			return true
+		}
+		return haveAtLeastOneStaticDependencyButNoneWithinTheSameFileOrTheSuperclass(
+			sdfinder, e, fromfilename, inh, ignore,
+		)
+	}
 	var smells []smell
 	if cfg.smells != "" {
 		sf, err := os.Open(cfg.smells)
@@ -236,21 +251,7 @@ func doAnalysis(
 	} else if len(clusteredgraphs) == 0 {
 		smells, err = findEvolutionarySmellsUsingDependencies(
 			f1, f2, sdfinder, ccdfinder,
-			func(e entity.Entity, fromfilename, tofilename string, ignore []string) bool {
-				// relaxes constraint of "evolutionary smell",
-				// by allowing method to depend on current class if
-				// static dependencies between the source and
-				// destination classes of the co-change dependency
-				// under analysis already exist
-				if allowToDependOnCurrentClass &&
-					fromfilename != tofilename &&
-					sdfinder.hasDependenciesBetweenFiles(fromfilename, tofilename) {
-					return true
-				}
-				return haveAtLeastOneStaticDependencyButNoneWithinTheSameFileOrTheSuperclass(
-					sdfinder, e, fromfilename, inh, ignore,
-				)
-			},
+			precondition,
 			inh,
 			minimumSupportCount,
 			minimumConfidence,
@@ -262,7 +263,7 @@ func doAnalysis(
 	} else {
 		for _, clusteredgraph := range clusteredgraphs {
 			ss, err := findEvolutionarySmellsUsingClusters(
-				f1, clusteredgraph, sdfinder, ccdfinder, inh,
+				f1, clusteredgraph, sdfinder, ccdfinder, precondition, inh,
 			)
 			check(err, "could not find smells")
 		next_smell:
