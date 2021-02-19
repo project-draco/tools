@@ -23,7 +23,8 @@ type config struct {
 	errorsfile,
 	inheritancefile,
 	fieldtypesfile,
-	supplementalRefactorings string
+	supplementalRefactorings,
+	smells string
 }
 
 var before = map[string]float64{
@@ -49,6 +50,7 @@ func main() {
 		"allow method to depend on current class",
 	)
 	supplementalRefactorings := flag.String("supplemental-refactorings", "", "")
+	smells := flag.String("smells", "", "use these smells instead of compute them")
 	configfile := flag.String("config", "", "")
 	flag.Parse()
 	if flag.NArg() < 3 && *configfile == "" {
@@ -69,7 +71,7 @@ func main() {
 				dotfiles = append(dotfiles, filepath.Join(*dotdir, fi.Name()))
 			}
 		}
-		configs = append(configs, config{dotfiles, flag.Arg(0), flag.Arg(1), flag.Arg(2), "", "", ""})
+		configs = append(configs, config{dotfiles, flag.Arg(0), flag.Arg(1), flag.Arg(2), "", "", "", *smells})
 		if flag.NArg() >= 4 {
 			configs[0].inheritancefile = flag.Arg(3)
 		}
@@ -94,6 +96,7 @@ func main() {
 				configfields[4],
 				configfields[5],
 				configfields[6],
+				"",
 			})
 		}
 		check(s.Err(), "could not read config")
@@ -214,7 +217,23 @@ func doAnalysis(
 		check(err, "could not read inheritance file")
 	}
 	var smells []smell
-	if len(clusteredgraphs) == 0 {
+	if cfg.smells != "" {
+		sf, err := os.Open(cfg.smells)
+		check(err, "could not open smells file")
+		defer sf.Close()
+		s := bufio.NewScanner(sf)
+		for s.Scan() {
+			if strings.TrimSpace(s.Text()) == "" {
+				continue
+			}
+			fields := strings.Split(s.Text(), " -> ")
+			smells = append(smells, smell{
+				entity: fields[0],
+				target: fields[1][:strings.Index(fields[1], " (")],
+			})
+		}
+		check(s.Err(), "could not read smells file")
+	} else if len(clusteredgraphs) == 0 {
 		smells, err = findEvolutionarySmellsUsingDependencies(
 			f1, f2, sdfinder, ccdfinder,
 			func(e entity.Entity, fromfilename, tofilename string, ignore []string) bool {
