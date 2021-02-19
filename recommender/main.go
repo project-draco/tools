@@ -12,6 +12,7 @@ import (
 	"strings"
 
 	"github.com/awalterschulze/gographviz"
+	"github.com/project-draco/naming"
 	"github.com/project-draco/pkg/entity"
 )
 
@@ -331,8 +332,8 @@ func computeMetrics(
 		supplementalReassignments := map[string]string{}
 		s := bufio.NewScanner(srf)
 		for s.Scan() {
-			arr := strings.Split(s.Text(), ";")
-			ent := entity.Entity(arr[0])
+			fields := strings.Split(s.Text(), ";")
+			ent := entity.Entity(naming.JavaToHR(fields[0]))
 			//TODO: the code bellow checks if the supplemental refactoring will not result in
 			// an improvement because another dependency remains after move. We must check if
 			// this code is necessary
@@ -340,7 +341,7 @@ func computeMetrics(
 				nil,
 				ent.QueryString(),
 				ent.Filename(),
-				[]string{arr[1]},
+				[]string{fields[1]},
 				sdfinder,
 				ccdfinder,
 				nil,
