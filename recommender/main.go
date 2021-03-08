@@ -22,9 +22,9 @@ type config struct {
 	cochangemdg,
 	errorsfile,
 	inheritancefile,
-	fieldtypesfile,
+	fieldtypesfile string
 	supplementalRefactorings,
-	smells string
+	smells []string
 }
 
 var before = map[string]float64{
@@ -71,7 +71,16 @@ func main() {
 				dotfiles = append(dotfiles, filepath.Join(*dotdir, fi.Name()))
 			}
 		}
-		configs = append(configs, config{dotfiles, flag.Arg(0), flag.Arg(1), flag.Arg(2), "", "", "", *smells})
+		configs = append(configs, config{
+			dotfiles,
+			flag.Arg(0),
+			flag.Arg(1),
+			flag.Arg(2),
+			"",
+			"",
+			nil,
+			splitIfNotEmpty(*smells, "|"),
+		})
 		if flag.NArg() >= 4 {
 			configs[0].inheritancefile = flag.Arg(3)
 		}
@@ -79,13 +88,13 @@ func main() {
 			configs[0].fieldtypesfile = flag.Arg(4)
 		}
 	} else {
-		fc, err := os.Open(*configfile)
+		cf, err := os.Open(*configfile)
 		check(err, "could not open config")
-		defer fc.Close()
-		s := bufio.NewScanner(fc)
+		defer cf.Close()
+		s := bufio.NewScanner(cf)
 		for s.Scan() {
 			configfields := strings.Split(s.Text(), ";")
-			for i := len(configfields); i < 7; i++ {
+			for i := len(configfields); i < 8; i++ {
 				configfields = append(configfields, "")
 			}
 			configs = append(configs, config{
@@ -95,8 +104,8 @@ func main() {
 				configfields[3],
 				configfields[4],
 				configfields[5],
-				configfields[6],
-				"",
+				splitIfNotEmpty(configfields[6], "|"),
+				splitIfNotEmpty(configfields[7], "|"),
 			})
 		}
 		check(s.Err(), "could not read config")
@@ -107,11 +116,11 @@ func main() {
 	}
 	for i, cfg := range configs {
 		computeMetrics := *output == "metric" || *output == "metapost" || *output == "csv"
-		smells, configImprovements, attributes := doAnalysis(
+		allsmells, configImprovements, attributes := doAnalysis(
 			cfg,
 			*output == "suggestions",
 			computeMetrics,
-			*supplementalRefactorings,
+			splitIfNotEmpty(*supplementalRefactorings, "|"),
 			*minimumSupportCount,
 			*minimumConfidence,
 			*allowToDependOnCurrentClass,
@@ -125,7 +134,7 @@ func main() {
 		} else if *output == "csv" {
 			fmt.Printf("%v;%v;%v;%v;%v;%v;",
 				cfg.dotfiles,
-				len(smells),
+				len(allsmells[0]),
 				attributes["entities-count"],
 				attributes["static-dependencies-count"],
 				attributes["co-change-dependencies-count"],
@@ -154,10 +163,10 @@ func main() {
 				fmt.Print(*dotdir)
 			}
 			if *output == "count" {
-				fmt.Printf(": %v\n", len(smells))
+				fmt.Printf(": %v\n", len(allsmells[0]))
 			} else {
 				fmt.Println()
-				for _, s := range smells {
+				for _, s := range allsmells[0] {
 					fmt.Println(s)
 				}
 				if i < len(configs)-1 {
@@ -175,11 +184,11 @@ func doAnalysis(
 	cfg config,
 	mustSearchCandidates,
 	metric bool,
-	supplementalRefactorings string,
+	supplementalRefactorings []string,
 	minimumSupportCount int,
 	minimumConfidence float64,
 	allowToDependOnCurrentClass bool,
-) ([]smell, []map[string]float64, map[string]float64) {
+) ([][]smell, []map[string]float64, map[string]float64) {
 	var clusteredgraphs []*gographviz.Graph
 	for _, dotfile := range cfg.dotfiles {
 		if dotfile == "" {
@@ -231,25 +240,30 @@ func doAnalysis(
 			sdfinder, e, fromfilename, inh, ignore,
 		)
 	}
-	var smells []smell
-	if cfg.smells != "" {
-		sf, err := os.Open(cfg.smells)
-		check(err, "could not open smells file")
-		defer sf.Close()
-		s := bufio.NewScanner(sf)
-		for s.Scan() {
-			if strings.TrimSpace(s.Text()) == "" {
-				continue
+	var allsmells [][]smell
+	if len(cfg.smells) > 0 {
+		for _, smellsFilename := range cfg.smells {
+			sf, err := os.Open(smellsFilename)
+			check(err, "could not open smells file")
+			defer sf.Close()
+			var smells []smell
+			s := bufio.NewScanner(sf)
+			for s.Scan() {
+				if strings.TrimSpace(s.Text()) == "" {
+					continue
+				}
+				fields := strings.Split(s.Text(), " -> ")
+				smells = append(smells, smell{
+					entity: fields[0],
+					target: fields[1][:strings.Index(fields[1], " (")],
+				})
 			}
-			fields := strings.Split(s.Text(), " -> ")
-			smells = append(smells, smell{
-				entity: fields[0],
-				target: fields[1][:strings.Index(fields[1], " (")],
-			})
+			check(s.Err(), "could not read smells file")
+			allsmells = append(allsmells, smells)
 		}
-		check(s.Err(), "could not read smells file")
 	} else if len(clusteredgraphs) == 0 {
-		smells, err = findEvolutionarySmellsUsingDependencies(
+		allsmells = [][]smell{{}}
+		allsmells[0], err = findEvolutionarySmellsUsingDependencies(
 			f1, f2, sdfinder, ccdfinder,
 			precondition,
 			inh,
@@ -258,9 +272,10 @@ func doAnalysis(
 		)
 		check(err, "could not find smells")
 		if mustSearchCandidates {
-			smells = searchCandidates(smells, f1, sdfinder, ccdfinder)
+			allsmells[0] = searchCandidates(allsmells[0], f1, sdfinder, ccdfinder)
 		}
 	} else {
+		allsmells = [][]smell{{}}
 		for _, clusteredgraph := range clusteredgraphs {
 			ss, err := findEvolutionarySmellsUsingClusters(
 				f1, clusteredgraph, sdfinder, ccdfinder, precondition, inh,
@@ -268,7 +283,7 @@ func doAnalysis(
 			check(err, "could not find smells")
 		next_smell:
 			for _, s := range ss {
-				for i, s_ := range smells {
+				for i, s_ := range allsmells[0] {
 					if s.entity == s_.entity && s.target == s_.target {
 						for _, c := range s.candidates {
 							for _, c_ := range s.candidates {
@@ -277,15 +292,15 @@ func doAnalysis(
 								}
 							}
 						}
-						smells[i] = s
+						allsmells[0][i] = s
 						continue next_smell
 					}
 				}
-				smells = append(smells, s)
+				allsmells[0] = append(allsmells[0], s)
 			}
 		}
 		if mustSearchCandidates {
-			smells = searchCandidates(smells, f1, sdfinder, ccdfinder)
+			allsmells[0] = searchCandidates(allsmells[0], f1, sdfinder, ccdfinder)
 		}
 	}
 
@@ -295,10 +310,10 @@ func doAnalysis(
 		if cfg.fieldtypesfile != "" {
 			fieldTypesFileName = cfg.fieldtypesfile
 		}
-		if cfg.supplementalRefactorings != "" && supplementalRefactorings == "" {
+		if len(cfg.supplementalRefactorings) > 0 && len(supplementalRefactorings) == 0 {
 			supplementalRefactorings = cfg.supplementalRefactorings
 		}
-		improvements = computeMetrics(sdfinder, ccdfinder, smells, inh,
+		improvements = computeMetrics(sdfinder, ccdfinder, allsmells, inh,
 			supplementalRefactorings, fieldTypesFileName, f1, f2)
 	}
 
@@ -316,14 +331,14 @@ func doAnalysis(
 		"clusters-density":             avgclustersdensity,
 	}
 
-	return smells, improvements, attrs
+	return allsmells, improvements, attrs
 }
 
 func computeMetrics(
 	sdfinder, ccdfinder *finder,
-	smells []smell,
+	allsmells [][]smell,
 	inh *inheritance,
-	supplementalRefactorings string,
+	supplementalRefactorings []string,
 	fieldTypesFileName string,
 	f1, f2 *os.File,
 ) []map[string]float64 {
@@ -336,23 +351,31 @@ func computeMetrics(
 		check(err, "could not read field types file")
 	}
 	var reassignments []map[string]string
-	evolutionaryReassignments := map[string]string{}
 	joinedReassignments := map[string]string{}
-	for _, s := range smells {
-		if s.target != "" {
-			evolutionaryReassignments[entity.Entity(s.entity).QueryString()] = s.target
-			joinedReassignments[entity.Entity(s.entity).QueryString()] = s.target
+	for _, smells := range allsmells {
+		evolutionaryReassignments := map[string]string{}
+		for _, s := range smells {
+			if s.target != "" {
+				evolutionaryReassignments[entity.Entity(s.entity).QueryString()] = s.target
+				joinedReassignments[entity.Entity(s.entity).QueryString()] = s.target
+			}
 		}
+		reassignments = append(reassignments, evolutionaryReassignments)
 	}
-	reassignments = append(reassignments, evolutionaryReassignments)
-	if supplementalRefactorings != "" {
-		srf, err := os.Open(supplementalRefactorings)
-		check(err, "could not opend supplemental refactorigs file")
+	for _, sr := range supplementalRefactorings {
+		srf, err := os.Open(sr)
+		check(err, "could not open supplemental refactorigs file")
 		defer srf.Close()
 		supplementalReassignments := map[string]string{}
 		s := bufio.NewScanner(srf)
 		for s.Scan() {
+			if strings.TrimSpace(s.Text()) == "" {
+				continue
+			}
 			fields := strings.Split(s.Text(), ";")
+			if len(fields) < 2 {
+				check(fmt.Errorf("invalid refactoring: %v, %v", s.Text(), sr), "")
+			}
 			ent := entity.Entity(naming.JavaToHR(fields[0]))
 			//TODO: the code bellow checks if the supplemental refactoring will not result in
 			// an improvement because another dependency remains after move. We must check if
@@ -373,16 +396,22 @@ func computeMetrics(
 		}
 		check(s.Err(), "could not read supplemental refactorings file")
 		reassignments = append(reassignments, supplementalReassignments)
+	}
+	if len(supplementalRefactorings) > 0 {
 		reassignments = append(reassignments, joinedReassignments)
 	}
 	return improvements(reassignments, inh, fldTypes, sdfinder, f1, f2)
 }
 
-func printMetapost(ii [][]map[string]float64) {
-	symbol := []string{"bullet", "star", "diamond"}
+func printMetapost(allImprovements [][]map[string]float64) {
+	symbol := []string{"bullet", "maltese", "blacktriangleright", "blackbowtie", "star", "blacklozenge"}
+	color := []string{"blue", "blue", "blue", "orange", "red", "OliveGreen"}
 	fmt.Println(`verbatimtex
 		%&latex
-		\documentclass[20pt]{article}
+		\documentclass[60pt]{article}
+        \usepackage[dvipsnames]{xcolor}
+        \usepackage{amsfonts,amssymb}
+        \usepackage{boisik}
 		\begin{document}
 		etex
 		`)
@@ -395,31 +424,42 @@ func printMetapost(ii [][]map[string]float64) {
 			fmt.Println("u = 1cm;")
 		}
 		min, max := math.MaxFloat64, -1.0
-		for _, improvements := range ii {
+		for _, improvements := range allImprovements {
 			imin, imax := improvementsBounds(improvements, metric, before[metric])
 			min = math.Min(imin, min)
 			max = math.Max(imax, max)
 		}
 		coef := 5.0 / max
-		fmt.Printf("draw (0,0)--(%[1]vu,0)--(%[1]vu,5u)--(0,5u)--cycle;\n", len(ii)+1)
+		fmt.Printf("draw (0,0)--(%[1]vu,0)--(%[1]vu,5u)--(0,5u)--cycle;\n", len(allImprovements)+1)
 		if min < 0 {
-			fmt.Printf("draw (0,0)--(%[1]vu,0)--(%[1]vu,%[2]vu)--(0,%[2]vu)--cycle;\n",
-				len(ii)+1, min*coef)
+			fmt.Printf("draw (0,0)--(%[1]vu,0)--(%[1]vu,%.6[2]fu)--(0,%.6[2]fu)--cycle;\n",
+				len(allImprovements)+1, min*coef)
 		}
 		fmt.Printf("label.lft(btex \\LARGE{$0$} etex,(0,0));\n")
-		fmt.Printf("label.lft(btex \\LARGE{$%.6f$} etex,(0,5u));\n", max)
+		fmt.Printf("label.lft(btex \\LARGE{$%.6f$} etex scaled 1.5,(0,5u));\n", max*100)
 		if min < 0 {
-			fmt.Printf("label.lft(btex \\LARGE{$%.6f$} etex,(0,%vu));\n", min, min*coef)
+			fmt.Printf("label.lft(btex \\LARGE{$%.6f$} etex scaled 1.5,(0,%.6fu));\n", min*100, min*coef)
 		}
-		for j, improvements := range ii {
+		fmt.Printf("label.bot(btex System index etex scaled 2.5, (%.6fu,%.6fu));\n", float64(len(allImprovements)+1)/2, min*coef-1.5)
+		for j, improvements := range allImprovements {
 			imin, imax := improvementsBounds(improvements, metric, before[metric])
 			imax = math.Max(imax, 0)
 			imin = math.Min(imin, 0)
-			fmt.Printf("draw (%[1]vu,%[2]vu)--(%[1]vu,%[3]vu);\n", j+1, imin*coef, imax*coef)
+			fmt.Printf("draw (%[1]vu,%.6[2]fu)--(%[1]vu,%.6[3]fu);\n", j+1, imin*coef, imax*coef)
 			for k := 0; k < len(improvements); k++ {
-				fmt.Printf(`label(btex \Huge{$\%[3]v$} etex,(%[1]vu,%[2]vu));
-				`, j+1, (improvements[k][metric]-before[metric])*coef, symbol[k])
+				value, ok := improvements[k][metric]
+				if ok {
+					fmt.Printf(
+						`label(btex \Huge{$\color{%[4]v}\%[3]v$} etex,(%[1]vu,%.6[2]fu));
+    `,
+						j+1,
+						(value-before[metric])*coef,
+						symbol[k],
+						color[k],
+					)
+				}
 			}
+			fmt.Printf("label.bot(btex %[1]v etex scaled 2.5, (%[1]vu,%.6fu));\n", j+1, min*coef-0.5)
 		}
 		fmt.Println("endfig;")
 	}
@@ -433,9 +473,13 @@ func printMetapost(ii [][]map[string]float64) {
 func improvementsBounds(improvements []map[string]float64, metric string, before float64) (float64, float64) {
 	min, max := math.MaxFloat64, -1.0
 	for k := 0; k < len(improvements); k++ {
-		val := improvements[k][metric] - before
-		min = math.Min(val, min)
-		max = math.Max(val, max)
+		value, ok := improvements[k][metric]
+		if !ok {
+			continue
+		}
+		delta := value - before
+		min = math.Min(delta, min)
+		max = math.Max(delta, max)
 	}
 	return min, max
 }
@@ -475,4 +519,11 @@ func check(err error, info string) {
 	if err != nil {
 		log.Fatalf("%v: %v", info, err)
 	}
+}
+
+func splitIfNotEmpty(str, sep string) []string {
+	if str == "" {
+		return nil
+	}
+	return strings.Split(str, sep)
 }

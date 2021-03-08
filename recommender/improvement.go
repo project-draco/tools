@@ -28,6 +28,8 @@ func improvements(
 	check(err, "could not create structure from static dependencies")
 	before := measure(dependencyGraph, dependencyGraph2, structure, inh, ft, sdfinder)
 	for i := range reassignments {
+		m := make(map[string]float64)
+		result = append(result, m)
 		if len(reassignments[i]) == 0 {
 			continue
 		}
@@ -42,7 +44,6 @@ func improvements(
 		check(err, "could not create structure from static dependencies")
 		after := measure(refactoredDependenciesGraph, refactoredDependenciesGraph2,
 			refactoredStructure, inh, ft, sdfinder)
-		m := make(map[string]float64)
 		for metric := range after {
 			if before[metric] == 0 {
 				m[metric] = 1
@@ -61,7 +62,6 @@ func improvements(
 		m["mpc2"] = -1 * m["mpc2"]
 		m["cbo2"] = -1 * m["cbo2"]
 		m["pc2"] = -1 * m["pc2"]
-		result = append(result, m)
 	}
 	return result
 }

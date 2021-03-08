@@ -30,7 +30,7 @@ func TestFindEvolutionarySmells(t *testing.T) {
 	`)
 	ccfinder, err := newFinder(ccdreader, nil)
 	checkT(t, err)
-	smells, err := findEvolutionarySmellsUsingClusters(sdreader, cg, sdfinder, ccfinder, nil)
+	smells, err := findEvolutionarySmellsUsingClusters(sdreader, cg, sdfinder, ccfinder, nil, nil)
 	smells = searchCandidates(smells, sdreader, sdfinder, ccfinder)
 	checkT(t, err)
 	if len(smells) != 1 {
