@@ -404,14 +404,13 @@ func computeMetrics(
 }
 
 func printMetapost(allImprovements [][]map[string]float64) {
-	symbol := []string{"bullet", "maltese", "blacktriangleright", "blackbowtie", "star", "blacklozenge"}
+	symbol := []string{"bullet", "maltese", "blacktriangleright", "blacksquare", "star", "blacklozenge"}
 	color := []string{"blue", "blue", "blue", "orange", "red", "OliveGreen"}
 	fmt.Println(`verbatimtex
 		%&latex
 		\documentclass[60pt]{article}
         \usepackage[dvipsnames]{xcolor}
         \usepackage{amsfonts,amssymb}
-        \usepackage{boisik}
 		\begin{document}
 		etex
 		`)
